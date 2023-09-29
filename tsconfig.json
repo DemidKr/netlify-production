@@ -15,8 +15,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-
+    "jsx": "react-jsx"
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }

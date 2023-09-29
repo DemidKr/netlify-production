@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { App } from "./App";
 
@@ -53,9 +55,11 @@ const theme = createTheme({
 root.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </LocalizationProvider>
     </ThemeProvider>
   </BrowserRouter>,
 );

@@ -120,7 +120,7 @@ export const Column = ({
       activationConstraint: {
         distance: 8,
       },
-    })
+    }),
   );
 
   const addNewTaskHandler = () => {
@@ -138,7 +138,7 @@ export const Column = ({
 
   const submitOnEnter = (
     e: KeyboardEvent<HTMLInputElement>,
-    callback: () => void
+    callback: () => void,
   ) => {
     if (e.key === "Enter") {
       callback();
@@ -147,14 +147,14 @@ export const Column = ({
 
   const deleteColumnHandler = (deleteIndex: number) => {
     const deletedColumnArray = columns.filter(
-      (_column, index) => index !== deleteIndex
+      (_column, index) => index !== deleteIndex,
     );
     setColumns(deletedColumnArray);
   };
 
   const deleteTaskHandler = (deleteIndex: number) => {
     const deletedTaskArray = currentColumn.tasks.filter(
-      (_column, index) => index !== deleteIndex
+      (_column, index) => index !== deleteIndex,
     );
     const copyColumnsArray = JSON.parse(JSON.stringify(columns));
     copyColumnsArray[currentColumnIndex].tasks = deletedTaskArray;
@@ -171,10 +171,10 @@ export const Column = ({
 
     if (over && active.id !== over.id) {
       const oldIndex = currentColumn.tasks.findIndex(
-        (item) => item.id === active.id
+        (item) => item.id === active.id,
       );
       const newIndex = currentColumn.tasks.findIndex(
-        (item) => item.id === over.id
+        (item) => item.id === over.id,
       );
       const newTasksOrder = arrayMove(currentColumn.tasks, oldIndex, newIndex);
 

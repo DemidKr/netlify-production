@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
-import App from "./App";
+import { App } from "./App";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 const theme = createTheme({
@@ -51,9 +52,11 @@ const theme = createTheme({
 });
 
 root.render(
-  <ThemeProvider theme={theme}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ThemeProvider>
+  </BrowserRouter>,
 );

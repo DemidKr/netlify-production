@@ -29,7 +29,7 @@ export const Columns = ({ columns, setColumns }: ColumnsProps) => {
       activationConstraint: {
         distance: 8,
       },
-    })
+    }),
   );
   const activeColumn = columns.find((column) => column.id === activeId);
 

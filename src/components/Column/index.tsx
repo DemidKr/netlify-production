@@ -7,6 +7,7 @@ import { TaskType } from "../../entities";
 import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
 import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
 import { Card } from "./components/Card";
+import { AddButton } from "./components/AddButton";
 
 export type ColumnType = {
   id: string;
@@ -93,6 +94,9 @@ export const Column = ({
               {currentColumn.tasks.length - 1}
             </Box>
           </Box>
+          {currentColumn.name === "Backlog" && (
+            <AddButton setShowAddTaskButton={() => {}} />
+          )}
         </Box>
         <Box
           sx={{
@@ -108,6 +112,9 @@ export const Column = ({
         sx={{
           display: "flex",
           flexDirection: "column",
+          maxHeight: "calc(100vh - 204px)",
+          padding: "10px",
+          overflowY: "auto",
         }}
       >
         {currentColumn.tasks.length > 0 && (

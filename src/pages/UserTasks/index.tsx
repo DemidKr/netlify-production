@@ -46,7 +46,7 @@ export const UserTasks = () => {
     },
     {
       id: "2",
-      name: "In Work",
+      name: "To Do",
       tasks: [
         {
           name: "1234",
@@ -59,7 +59,7 @@ export const UserTasks = () => {
           hidden: true,
         },
         {
-          name: "123",
+          name: "Onboarding Illustrations ",
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HIGH,
@@ -89,7 +89,7 @@ export const UserTasks = () => {
     },
     {
       id: "3",
-      name: "On Progress",
+      name: "In Progress",
       tasks: [
         {
           name: "1234",
@@ -102,7 +102,7 @@ export const UserTasks = () => {
           hidden: true,
         },
         {
-          name: "1234",
+          name: "Brainstorming",
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.LOW,
@@ -115,7 +115,7 @@ export const UserTasks = () => {
           id: "16",
         },
         {
-          name: "2225",
+          name: "Mobile App Design",
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HOT,
@@ -128,41 +128,6 @@ export const UserTasks = () => {
     },
     {
       id: "4",
-      name: "Done",
-      tasks: [
-        {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: v4uuid(),
-          hidden: true,
-        },
-        {
-          name: "1234",
-          description:
-            "Low fidelity wireframes include the most basic content and visuals.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "20",
-        },
-        {
-          name: "2225",
-          description:
-            "Low fidelity wireframes include the most basic content and visuals.",
-          status: PRIORITY_ENUM.HOT,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "21",
-        },
-      ],
-      color: "#8BC48A",
-    },
-    {
-      id: "5",
       name: "QA",
       tasks: [
         {
@@ -195,6 +160,41 @@ export const UserTasks = () => {
         },
       ],
       color: "#33BFFF",
+    },
+    {
+      id: "5",
+      name: "Done",
+      tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
+        {
+          name: "1234",
+          description:
+            "Low fidelity wireframes include the most basic content and visuals.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: "20",
+        },
+        {
+          name: "Design System",
+          description:
+            "Low fidelity wireframes include the most basic content and visuals.",
+          status: PRIORITY_ENUM.HOT,
+          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: "21",
+        },
+      ],
+      color: "#8BC48A",
     },
   ]);
 

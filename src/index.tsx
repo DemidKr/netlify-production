@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import { App } from "./App";
 
@@ -58,6 +59,7 @@ root.render(
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <React.StrictMode>
           <App />
+          <CssBaseline />
         </React.StrictMode>
       </LocalizationProvider>
     </ThemeProvider>

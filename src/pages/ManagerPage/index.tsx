@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import { CreateTaskModal } from "./modals";
+import { CreateTaskModal, DeleteTaskModal } from "./modals";
 
 export const ManagerPage = () => {
-  const [showCreateTaskModal, setShowCreateTaskModal] = useState(true);
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+  const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
 
   return (
     <>
@@ -12,6 +13,12 @@ export const ManagerPage = () => {
       <CreateTaskModal
         show={showCreateTaskModal}
         onClose={() => setShowCreateTaskModal(false)}
+      />
+
+      <DeleteTaskModal
+        show={showDeleteTaskModal}
+        onClose={() => setShowDeleteTaskModal(false)}
+        taskId="123"
       />
     </>
   );

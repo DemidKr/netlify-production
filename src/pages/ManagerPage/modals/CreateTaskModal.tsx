@@ -5,13 +5,16 @@ import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import api from "../../../utils/axios";
-import { CustomSelect, ModalWindow } from "../../index";
+import { CustomSelect, ModalWindow } from "../../../components/index";
 import { BASIC_DATE_FORMAT } from "../../../constants";
-import { PRIORITY_ENUM } from "../../../entities";
-import {
-  MOCK_EXECUTOR,
-  PRIORITIES_TASK,
-} from "../../../pages/ManagerPage/modals/constants";
+import { PRIORITIES_TASK, PRIORITY_ENUM } from "../../../entities";
+
+export const MOCK_EXECUTOR = [
+  { name: "Иван Иванович", code: "123" },
+  { name: "Петр Петрович", code: "51234" },
+  { name: "Никита Сергеевич", code: "9123333" },
+  { name: "Алексей Михайлович", code: "5444" },
+];
 
 interface IProps {
   show: boolean;

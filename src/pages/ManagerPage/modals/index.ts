@@ -1,2 +1,2 @@
-export * from "../../../components/Column/components/CreateTaskModal";
+export * from "./CreateTaskModal";
 export * from "./DeleteTaskModal";

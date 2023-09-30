@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Box from "@mui/material/Box";
-import { PRIORITY_ENUM } from "../../../entities";
-import { PRIORITIES_TASK } from "../../../pages/ManagerPage/modals/constants";
+import { PRIORITIES_TASK, PRIORITY_ENUM } from "../../../entities";
 
 type IProps = {
   status: PRIORITY_ENUM;
@@ -15,25 +14,21 @@ export const Status: FC<IProps> = ({ status }) => {
           background: "rgba(131, 194, 157, 0.20)",
           color: "#68B266",
         };
-        break;
       case PRIORITY_ENUM.MEDIUM:
         return {
           background: "rgba(223,193,116,0.2)",
           color: "#d5b949",
         };
-        break;
       case PRIORITY_ENUM.HIGH:
         return {
           background: "rgba(223, 168, 116, 0.20)",
           color: "#D58D49",
         };
-        break;
       case PRIORITY_ENUM.HOT:
         return {
           background: "rgba(216, 114, 125, 0.10)",
           color: "#D8727D",
         };
-        break;
     }
   };
 

@@ -19,9 +19,14 @@ import { Card } from "../Column/components/Card";
 type ColumnsProps = {
   columns: ColumnType[];
   setColumns: (columns: ColumnType[]) => void;
+  setShowCreateTaskModal?: () => void;
 };
 
-export const Columns = ({ columns, setColumns }: ColumnsProps) => {
+export const Columns = ({
+  columns,
+  setColumns,
+  setShowCreateTaskModal,
+}: ColumnsProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
@@ -114,6 +119,7 @@ export const Columns = ({ columns, setColumns }: ColumnsProps) => {
             columns={columns}
             currentColumn={column}
             setColumns={setColumns}
+            setShowCreateTaskModal={setShowCreateTaskModal}
           />
         ))}
         <DragOverlay>

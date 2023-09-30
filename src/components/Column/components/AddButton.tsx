@@ -1,12 +1,11 @@
-import { Dispatch, FC, SetStateAction } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 
 type IProps = {
-  setShowAddTaskButton: Dispatch<SetStateAction<boolean>>;
+  setShowAddTaskButton: () => void;
 };
 
-export const AddButton: FC<IProps> = ({ setShowAddTaskButton }) => {
+export const AddButton = ({ setShowAddTaskButton }: IProps) => {
   return (
     <Button
       variant="contained"
@@ -24,7 +23,7 @@ export const AddButton: FC<IProps> = ({ setShowAddTaskButton }) => {
           background: "#bbb3e8",
         },
       }}
-      onClick={() => setShowAddTaskButton(true)}
+      onClick={setShowAddTaskButton}
     >
       <AddIcon sx={{ color: "#5030E5", width: "16px", height: "16px" }} />
     </Button>

@@ -16,11 +16,12 @@ export type ColumnType = {
   color: string;
 };
 
-type ColumnProps = {
+type IProps = {
   columns: ColumnType[];
   currentColumn: ColumnType;
   currentColumnIndex: number;
   setColumns: (columns: ColumnType[]) => void;
+  setShowCreateTaskModal?: () => void;
 };
 
 export const Column = ({
@@ -28,7 +29,8 @@ export const Column = ({
   currentColumn,
   currentColumnIndex,
   setColumns,
-}: ColumnProps) => {
+  setShowCreateTaskModal,
+}: IProps) => {
   const deleteTaskHandler = (deleteIndex: number) => {
     const deletedTaskArray = currentColumn.tasks.filter(
       (_column, index) => index !== deleteIndex,
@@ -94,8 +96,8 @@ export const Column = ({
               {currentColumn.tasks.length - 1}
             </Box>
           </Box>
-          {currentColumn.name === "Backlog" && (
-            <AddButton setShowAddTaskButton={() => {}} />
+          {currentColumn.name === "Backlog" && setShowCreateTaskModal && (
+            <AddButton setShowAddTaskButton={setShowCreateTaskModal} />
           )}
         </Box>
         <Box

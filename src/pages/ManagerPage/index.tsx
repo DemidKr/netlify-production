@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { v4 as v4uuid } from "uuid";
+import { Box } from "@mui/material";
 
 import { Columns, ColumnType, MainWrapper } from "../../components";
 import { DeleteTaskModal } from "./modals";
-import { Box } from "@mui/material";
 import { PRIORITY_ENUM } from "../../entities";
-import { v4 as v4uuid } from "uuid";
+import { CreateTaskModal } from "./modals/CreateTaskModal";
 
 export const ManagerPage = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
@@ -198,17 +199,27 @@ export const ManagerPage = () => {
   ]);
 
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
 
   return (
     <MainWrapper>
       <Box>
-        <Columns columns={columns} setColumns={setColumns} />
+        <Columns
+          columns={columns}
+          setColumns={setColumns}
+          setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
+        />
       </Box>
 
       <DeleteTaskModal
         show={showDeleteTaskModal}
         onClose={() => setShowDeleteTaskModal(false)}
         taskId="123"
+      />
+
+      <CreateTaskModal
+        show={showCreateTaskModal}
+        onClose={() => setShowCreateTaskModal(false)}
       />
     </MainWrapper>
   );

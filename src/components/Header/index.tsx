@@ -40,7 +40,7 @@ export const Header = () => {
       <Toolbar>
         <Icon />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} pl="12px">
-          Task Manager
+          Sprinter
         </Typography>
 
         <Box>

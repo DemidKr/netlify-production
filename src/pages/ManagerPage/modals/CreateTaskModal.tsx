@@ -19,7 +19,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState<Dayjs | null>(
-    dayjs().add(14, "day")
+    dayjs().add(14, "day"),
   );
   const [priority, setPriority] = useState(PRIORITY_ENUM.MIDDLE);
   const [executor, setExecutor] = useState("");

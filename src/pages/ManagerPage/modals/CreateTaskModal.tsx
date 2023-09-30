@@ -25,7 +25,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   const [executor, setExecutor] = useState("");
 
   const handleSubmit = () => {
-    api
+    api()
       .post("/task", {
         title,
         description,

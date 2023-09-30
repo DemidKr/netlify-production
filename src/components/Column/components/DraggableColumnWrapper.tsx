@@ -29,7 +29,7 @@ export const DraggableColumnWrapper = ({
         minHeight: "500px",
         borderRadius: "16px",
         background: "#F5F5F5",
-        padding: "20px",
+        padding: "20px 20px 0  20px",
       }}
     >
       {children}

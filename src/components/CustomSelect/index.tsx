@@ -1,7 +1,9 @@
-import { PropsWithChildren } from "react";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+
+import { ISelectItem } from "../../entities";
 
 type IProps = {
   label: string;
@@ -9,16 +11,17 @@ type IProps = {
   value: string;
   onSelect: (value: string) => void;
   fullWidth: boolean;
+  items: ISelectItem[];
 };
 
 export const CustomSelect = ({
   label,
-  children,
   value,
   labelId,
   onSelect,
   fullWidth,
-}: PropsWithChildren<IProps>) => {
+  items,
+}: IProps) => {
   return (
     <FormControl fullWidth={fullWidth}>
       <InputLabel id={labelId}>{label}</InputLabel>
@@ -28,7 +31,11 @@ export const CustomSelect = ({
         labelId={labelId}
         onChange={(e) => onSelect(e.target.value)}
       >
-        {children}
+        {items.map((item) => (
+          <MenuItem key={item.code} value={item.code}>
+            {item.name}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

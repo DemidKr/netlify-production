@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import type { Breakpoint } from "@mui/material/styles";
 
-type ModalWindowProps = {
+type IProps = {
   open: boolean;
   title: string;
   children: React.ReactNode;
@@ -35,7 +35,7 @@ export const ModalWindow = ({
   fullWidth = true,
   onClose,
   onSubmit,
-}: ModalWindowProps) => {
+}: IProps) => {
   return (
     <Dialog
       open={open}

@@ -2,11 +2,10 @@ import { useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { ModalWindow } from "../../../components/modal-window";
+import { CustomSelect, ModalWindow } from "../../../components";
 import { BASIC_DATE_FORMAT } from "../../../constants";
 import { PRIORITY_ENUM } from "../../../entities";
 import { PRIORITIES_TASK } from "./constants";
@@ -20,7 +19,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState<Dayjs | null>(
-    dayjs().add(14, "day"),
+    dayjs().add(14, "day")
   );
   const [priority, setPriority] = useState<PRIORITY_ENUM>(PRIORITY_ENUM.MIDDLE);
 
@@ -39,10 +38,12 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           flexDirection: "column",
           textAlign: "center",
           gap: "16px",
+          py: "16px",
         }}
       >
         <TextField
           fullWidth
+          maxRows={1}
           label="Имя"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -50,6 +51,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
 
         <TextField
           fullWidth
+          multiline
           label="Описание"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
@@ -63,16 +65,17 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           onChange={setDeadline}
         />
 
-        <Select
+        <CustomSelect
           fullWidth
           value={priority}
+          labelId="priority-label"
           label="Приоритет"
-          onChange={(e) => setPriority(e.target.value as PRIORITY_ENUM)}
+          onSelect={(value) => setPriority(value as PRIORITY_ENUM)}
         >
           {PRIORITIES_TASK.map((priority) => (
             <MenuItem value={priority.code}>{priority.name}</MenuItem>
           ))}
-        </Select>
+        </CustomSelect>
       </Box>
     </ModalWindow>
   );

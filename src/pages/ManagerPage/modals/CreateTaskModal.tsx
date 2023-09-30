@@ -23,6 +23,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   );
   const [priority, setPriority] = useState(PRIORITY_ENUM.MEDIUM);
   const [executor, setExecutor] = useState("");
+  const [estimate, setEstimate] = useState(0);
 
   const handleSubmit = () => {
     api()
@@ -32,6 +33,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
         deadline,
         priority,
         executor,
+        estimate,
       })
       .then(() => {
         onClose();
@@ -46,7 +48,9 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
       title="Создание задачи"
       maxWidth="sm"
       onSubmit={handleSubmit}
-      disabledSubmitButton={title.length === 0 || !priority || !executor}
+      disabledSubmitButton={
+        title.length === 0 || !priority || !executor || estimate <= 0
+      }
     >
       <Box
         sx={{
@@ -104,6 +108,15 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           label="Исполнитель"
           onSelect={setExecutor}
           items={MOCK_EXECUTOR}
+        />
+
+        <TextField
+          fullWidth
+          label="Оценка"
+          type="number"
+          value={estimate}
+          inputProps={{ inputMode: "numeric" }}
+          onChange={(e) => setEstimate(+(e.target.value ?? 0))}
         />
       </Box>
     </ModalWindow>

@@ -6,11 +6,13 @@ import React from "react";
 type DraggableTaskWrapperProps = {
   id: string;
   children: React.ReactNode;
+  hidden?: boolean;
 };
 
 export const DraggableTaskWrapper = ({
   id,
   children,
+  hidden,
 }: DraggableTaskWrapperProps) => {
   const {
     attributes,
@@ -24,11 +26,13 @@ export const DraggableTaskWrapper = ({
   return (
     <Box
       sx={{
-        width: "calc(100% - 40px)",
-        height: "fit-content",
+        width: "100%",
+        height: hidden ? 0 : "fit-content",
         borderRadius: "16px",
         background: "#FFF",
-        padding: "20px",
+        padding: hidden ? 0 : "20px",
+        mb: hidden ? 0 : "20px",
+        userSelect: "none",
       }}
     >
       <div

@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { v4 as v4uuid } from "uuid";
 
 import { Columns } from "../../components/Columns";
 import type { ColumnType } from "../../components/Column";
+import { Box } from "@mui/material";
 import { PRIORITY_ENUM } from "../../entities";
-import { MainWrapper } from "../../components";
 
 export const UserTasks = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
     {
-      id: "1234",
+      id: "1",
       name: "Backlog",
-
       tasks: [
         {
           name: "1234",
@@ -20,7 +19,17 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.LOW,
           author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
           executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "123",
+          id: v4uuid(),
+          hidden: true,
+        },
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: "12",
         },
         {
           name: "2225",
@@ -29,15 +38,25 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.MEDIUM,
           author: { id: "12", firstName: "Dmitry", secondName: "Pupkin" },
           executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "1234",
+          id: "13",
         },
       ],
       color: "#8BC48A",
     },
     {
-      id: "123321",
+      id: "2",
       name: "In Work",
       tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
         {
           name: "123",
           description:
@@ -49,7 +68,7 @@ export const UserTasks = () => {
             firstName: "Travis",
             secondName: "Howard",
           },
-          id: "1",
+          id: "14",
         },
         {
           name: "222",
@@ -62,15 +81,25 @@ export const UserTasks = () => {
             firstName: "Travis",
             secondName: "Howard",
           },
-          id: "12",
+          id: "11231235",
         },
       ],
       color: "#5030E5",
     },
     {
-      id: "123",
+      id: "3",
       name: "On Progress",
       tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
         {
           name: "1234",
           description:
@@ -82,7 +111,7 @@ export const UserTasks = () => {
             firstName: "Travis",
             secondName: "Howard",
           },
-          id: "123",
+          id: "16",
         },
         {
           name: "2225",
@@ -91,15 +120,25 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.HOT,
           author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
           executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
-          id: "1234",
+          id: "17",
         },
       ],
       color: "#FFA500",
     },
     {
-      id: "12345",
+      id: "4",
       name: "QA",
       tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
         {
           name: "1234",
           description:
@@ -107,7 +146,7 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.HIGH,
           author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
           executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
-          id: "123",
+          id: "18",
         },
         {
           name: "2225",
@@ -116,15 +155,25 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.MEDIUM,
           author: { id: "12", firstName: "Cindy", secondName: "Baker" },
           executor: { id: "12", firstName: "Remy", secondName: "Sharp" },
-          id: "1234",
+          id: "19",
         },
       ],
       color: "#8BC48A",
     },
     {
-      id: "123456",
+      id: "5",
       name: "Done",
       tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
         {
           name: "1234",
           description:
@@ -132,7 +181,7 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.LOW,
           author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
           executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "123",
+          id: "20",
         },
         {
           name: "2225",
@@ -141,7 +190,7 @@ export const UserTasks = () => {
           status: PRIORITY_ENUM.HOT,
           author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
           executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "1234",
+          id: "21",
         },
       ],
       color: "#8BC48A",
@@ -149,10 +198,10 @@ export const UserTasks = () => {
   ]);
 
   return (
-    <MainWrapper>
+    <>
       <Box>
         <Columns columns={columns} setColumns={setColumns} />
       </Box>
-    </MainWrapper>
+    </>
   );
 };

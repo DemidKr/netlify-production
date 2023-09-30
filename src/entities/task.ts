@@ -14,4 +14,5 @@ export interface TaskType {
   status: PRIORITY_ENUM;
   author: IUser;
   executor: IUser;
+  hidden?: boolean;
 }

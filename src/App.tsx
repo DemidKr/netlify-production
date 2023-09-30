@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import { UserTasks, Login, ManagerPage } from "./pages";
+import { UserTasks, Login, ManagerPage, StatsPage } from "./pages";
 
 export const App = () => {
   const hasAccessToken = true;
@@ -23,6 +23,7 @@ export const App = () => {
         <>
           <Route path="/tasks" element={<UserTasks />} />
           <Route path="/management" element={<ManagerPage />} />
+          <Route path="/stats" element={<StatsPage />} />
         </>
       )}
 

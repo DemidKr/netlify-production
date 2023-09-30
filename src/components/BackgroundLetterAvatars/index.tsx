@@ -33,8 +33,6 @@ export const BackgroundLetterAvatars = ({ firstName, secondName }: IProps) => {
     <Avatar
       sx={{
         bgcolor: stringToColor(firstName + " " + secondName),
-        width: "25px",
-        height: "25px",
       }}
     >
       <Typography

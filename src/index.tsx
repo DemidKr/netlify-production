@@ -17,6 +17,9 @@ const theme = createTheme({
     primary: {
       main: "#3454D1",
     },
+    secondary: {
+      main: "rgba(216, 232, 255, 0.25)",
+    },
     action: {
       hover: "#F9FAFE",
     },

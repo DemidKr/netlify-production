@@ -28,7 +28,15 @@ export const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ height: "62px" }}>
+    <AppBar
+      position="static"
+      color="secondary"
+      sx={{
+        height: "62px",
+        boxShadow:
+          "0px 2px 4px -1px rgba(0,0,0,0.01), 0px 4px 5px 0px rgba(0,0,0,0.05), 0px 1px 10px 0px rgba(0,0,0,0.1)",
+      }}
+    >
       <Toolbar>
         <Icon />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} pl="12px">
@@ -36,7 +44,12 @@ export const Header = () => {
         </Typography>
 
         <Box>
-          <IconButton size="large" onClick={handleMenu} color="inherit">
+          <IconButton
+            size="large"
+            onClick={handleMenu}
+            color="inherit"
+            sx={{ padding: 0 }}
+          >
             <BackgroundLetterAvatars firstName="Тест" secondName="Иван" />
           </IconButton>
           <Menu

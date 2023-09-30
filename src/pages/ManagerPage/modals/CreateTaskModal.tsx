@@ -19,7 +19,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState<Dayjs | null>(
-    dayjs().add(14, "day"),
+    dayjs().add(14, "day")
   );
   const [priority, setPriority] = useState(PRIORITY_ENUM.MIDDLE);
   const [executor, setExecutor] = useState("");
@@ -31,6 +31,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
         description,
         deadline,
         priority,
+        executor,
       })
       .then(() => {
         onClose();
@@ -45,6 +46,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
       title="Создание задачи"
       maxWidth="md"
       onSubmit={handleSubmit}
+      disabledSubmitButton={title.length === 0 || !priority || !executor}
     >
       <Box
         sx={{
@@ -56,6 +58,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
         }}
       >
         <TextField
+          required
           fullWidth
           maxRows={1}
           label="Имя"
@@ -81,6 +84,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           />
 
           <CustomSelect
+            required
             fullWidth
             value={priority}
             labelId="priority-label"
@@ -92,6 +96,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
 
         <CustomSelect
           fullWidth
+          required
           value={executor}
           labelId="executor-label"
           label="Исполнитель"

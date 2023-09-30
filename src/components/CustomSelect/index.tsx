@@ -12,6 +12,7 @@ type IProps = {
   onSelect: (value: string) => void;
   fullWidth: boolean;
   items: ISelectItem[];
+  required?: boolean;
 };
 
 export const CustomSelect = ({
@@ -21,9 +22,10 @@ export const CustomSelect = ({
   onSelect,
   fullWidth,
   items,
+  required,
 }: IProps) => {
   return (
-    <FormControl fullWidth={fullWidth}>
+    <FormControl fullWidth={fullWidth} required={required}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <Select
         value={value}

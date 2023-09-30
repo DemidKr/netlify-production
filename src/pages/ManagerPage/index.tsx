@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CreateTaskModal } from "./modals";
 
 export const ManagerPage = () => {
-  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(true);
 
   return (
     <>

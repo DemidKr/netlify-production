@@ -15,6 +15,7 @@ import {
   arrayMove,
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
+import { Box } from "@mui/material";
 
 type ColumnsProps = {
   columns: ColumnType[];
@@ -51,7 +52,15 @@ export const Columns = ({ columns, setColumns }: ColumnsProps) => {
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        gap: "50px",
+        alignItems: "center",
+        padding: "40px",
+      }}
+    >
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -80,6 +89,6 @@ export const Columns = ({ columns, setColumns }: ColumnsProps) => {
           </DragOverlay>
         </SortableContext>
       </DndContext>
-    </div>
+    </Box>
   );
 };

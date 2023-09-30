@@ -1,4 +1,4 @@
-import React, { useState, type KeyboardEvent } from "react";
+import React, { type KeyboardEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -8,27 +8,28 @@ import TextField from "@mui/material/TextField";
 import {
   closestCenter,
   DndContext,
+  type DragEndEvent,
   DragOverlay,
+  type DragStartEvent,
   MouseSensor,
   useSensor,
   useSensors,
-  type DragStartEvent,
-  type DragEndEvent,
 } from "@dnd-kit/core";
 import {
-  SortableContext,
   arrayMove,
   rectSortingStrategy,
+  SortableContext,
 } from "@dnd-kit/sortable";
-import { DraggableTaskWrapper } from "./DraggableTaskWrapper";
-import { DraggableColumnWrapper } from "./DraggableColumnWrapper";
-import { CancelButton } from "./CancelButton";
-import { AddButton } from "./AddButton";
 
-export type TaskType = {
-  id: string;
-  name: string;
-};
+import { PRIORITY_ENUM, TaskType } from "../../entities";
+import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
+import { CancelButton } from "./components/CancelButton";
+import { AddButton } from "./components/AddButton";
+import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
+import { Status } from "./components/Status";
+import { CardMenu } from "./components/CardMenu";
+import { BackgroundLetterAvatars } from "../BackgroundLetterAvatars";
+import { Stack } from "@mui/material";
 
 export type ColumnType = {
   id: string;
@@ -69,6 +70,10 @@ export const Column = ({
       columnsCopy[currentColumnIndex].tasks.push({
         id: uuidv4(),
         name: taskName,
+        description: taskName,
+        status: PRIORITY_ENUM.MEDIUM,
+        author: { id: "1", firstName: "Oleg", secondName: "Petrov" },
+        executor: { id: "1", firstName: "Cindy", secondName: "Sharp" },
       });
       setColumns(columnsCopy);
       setTaskName("");
@@ -157,6 +162,7 @@ export const Column = ({
                 fontWeight: 500,
                 lineHeight: "normal",
                 marginLeft: "8px",
+                fontFamily: "Inter",
               }}
             >
               {currentColumn.name}
@@ -171,6 +177,7 @@ export const Column = ({
                 height: "20px",
                 borderRadius: "50%",
                 marginLeft: "12px",
+                fontFamily: "Inter",
               }}
             >
               {currentColumn.tasks.length}
@@ -255,45 +262,56 @@ export const Column = ({
                       alignItems: "center",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: "23px",
-                        padding: "0 6px",
-                        borderRadius: "4px",
-                        background: "rgba(223, 168, 116, 0.20)",
-                        color: "#D58D49",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: "500",
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Low
-                    </Box>
-                    <Button
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "20px",
-                        minWidth: "20px",
-                        height: "20px",
-                        borderRadius: "4px",
-                        padding: 0,
-                        color: "#000",
-                      }}
-                    >
-                      ...
-                    </Button>
+                    <Status status={task.status} />
+                    <CardMenu deleteCard={() => deleteTaskHandler(index)} />
                   </Box>
-                  <div>{task.name}</div>
-
-                  <button onClick={() => deleteTaskHandler(index)}>
-                    Delete Task
-                  </button>
+                  <Typography
+                    component="h3"
+                    sx={{
+                      color: "#0D062D",
+                      fontFamily: "Inter",
+                      fontSize: "18px",
+                      fontStyle: "normal",
+                      fontWeight: "600",
+                      lineHeight: "normal",
+                      mt: "6px",
+                    }}
+                  >
+                    {task.name}
+                  </Typography>
+                  <Typography
+                    component="h6"
+                    sx={{
+                      color: "#787486",
+                      fontFamily: "Inter",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "normal",
+                      mt: "8px",
+                    }}
+                  >
+                    {task.description}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      mt: "28px",
+                    }}
+                  >
+                    <Stack direction="row" spacing={1}>
+                      <BackgroundLetterAvatars
+                        firstName={task.author.firstName}
+                        secondName={task.author.secondName}
+                      />
+                      <BackgroundLetterAvatars
+                        firstName={task.executor.firstName}
+                        secondName={task.executor.secondName}
+                      />
+                    </Stack>
+                  </Box>
                 </DraggableTaskWrapper>
               ))}
 

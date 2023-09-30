@@ -21,7 +21,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
   const [deadline, setDeadline] = useState<Dayjs | null>(
     dayjs().add(14, "day"),
   );
-  const [priority, setPriority] = useState(PRIORITY_ENUM.MIDDLE);
+  const [priority, setPriority] = useState(PRIORITY_ENUM.MEDIUM);
   const [executor, setExecutor] = useState("");
 
   const handleSubmit = () => {

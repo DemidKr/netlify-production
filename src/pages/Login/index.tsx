@@ -1,16 +1,14 @@
+import React, { useState } from "react";
+import type { AxiosResponse } from "axios";
 import { Box, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
 import Button from "@mui/material/Button";
 
 import api from "../../utils/axios";
 import { IUser } from "../../entities/user";
-import type { AxiosResponse } from "axios";
-import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-  const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,7 +24,8 @@ export const Login = () => {
         if (body?.data) {
           localStorage.setItem("access_token", body.data?.api_token ?? "");
           localStorage.setItem("user", JSON.stringify(body.data));
-          navigate("/tasks");
+          // eslint-disable-next-line no-restricted-globals
+          location.reload();
         }
       })
       .finally(() => {

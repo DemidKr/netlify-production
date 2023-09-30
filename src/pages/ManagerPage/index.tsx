@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { MainWrapper } from '../../components';
-import { CreateTaskModal, DeleteTaskModal } from './modals';
+import { MainWrapper } from "../../components";
+import { CreateTaskModal, DeleteTaskModal } from "./modals";
 
 export const ManagerPage = () => {
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(true);

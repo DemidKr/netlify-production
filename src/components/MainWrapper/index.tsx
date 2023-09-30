@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box';
-import { ReactNode } from 'react';
-import { Header } from '../Header';
+import Box from "@mui/material/Box";
+import { ReactNode } from "react";
+import { Header } from "../Header";
 
 interface IProps {
   children: ReactNode;

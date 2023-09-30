@@ -44,7 +44,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
       open={show}
       onClose={onClose}
       title="Создание задачи"
-      maxWidth="md"
+      maxWidth="sm"
       onSubmit={handleSubmit}
       disabledSubmitButton={title.length === 0 || !priority || !executor}
     >
@@ -62,6 +62,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           fullWidth
           maxRows={1}
           label="Имя"
+          size="medium"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -70,6 +71,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           fullWidth
           multiline
           label="Описание"
+          minRows={3}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

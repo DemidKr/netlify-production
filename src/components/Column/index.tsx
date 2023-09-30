@@ -1,9 +1,6 @@
-import React, { type KeyboardEvent, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 
 import {
   closestCenter,
@@ -21,10 +18,8 @@ import {
   SortableContext,
 } from "@dnd-kit/sortable";
 
-import { PRIORITY_ENUM, TaskType } from "../../entities";
+import { TaskType } from "../../entities";
 import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
-import { CancelButton } from "./components/CancelButton";
-import { AddButton } from "./components/AddButton";
 import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
 import { Status } from "./components/Status";
 import { CardMenu } from "./components/CardMenu";
@@ -51,8 +46,6 @@ export const Column = ({
   currentColumnIndex,
   setColumns,
 }: ColumnProps) => {
-  const [taskName, setTaskName] = useState("");
-  const [showAddTaskButton, setShowAddTaskButton] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeTask = currentColumn.tasks.find((task) => task.id === activeId);
 
@@ -63,32 +56,6 @@ export const Column = ({
       },
     }),
   );
-
-  const addNewTaskHandler = () => {
-    if (taskName?.length > 0) {
-      const columnsCopy: ColumnType[] = JSON.parse(JSON.stringify(columns));
-      columnsCopy[currentColumnIndex].tasks.push({
-        id: uuidv4(),
-        name: taskName,
-        description: taskName,
-        status: PRIORITY_ENUM.MEDIUM,
-        author: { id: "1", firstName: "Oleg", secondName: "Petrov" },
-        executor: { id: "1", firstName: "Cindy", secondName: "Sharp" },
-      });
-      setColumns(columnsCopy);
-      setTaskName("");
-      setShowAddTaskButton(false);
-    }
-  };
-
-  const submitOnEnter = (
-    e: KeyboardEvent<HTMLInputElement>,
-    callback: () => void,
-  ) => {
-    if (e.key === "Enter") {
-      callback();
-    }
-  };
 
   const deleteTaskHandler = (deleteIndex: number) => {
     const deletedTaskArray = currentColumn.tasks.filter(
@@ -120,11 +87,6 @@ export const Column = ({
       copyColumnsArray[currentColumnIndex].tasks = newTasksOrder;
       setColumns(copyColumnsArray);
     }
-  };
-
-  const handleCancelAddTask = () => {
-    setTaskName("");
-    setShowAddTaskButton(false);
   };
 
   return (
@@ -183,13 +145,6 @@ export const Column = ({
               {currentColumn.tasks.length}
             </Box>
           </Box>
-          {showAddTaskButton ? (
-            <CancelButton cancel={handleCancelAddTask} />
-          ) : (
-            <AddButton
-              setShowAddTaskButton={() => setShowAddTaskButton(true)}
-            />
-          )}
         </Box>
         <Box
           sx={{
@@ -199,41 +154,6 @@ export const Column = ({
             margin: "20px 0",
           }}
         />
-
-        {showAddTaskButton && (
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <TextField
-              variant="outlined"
-              label="Task name"
-              size="small"
-              value={taskName}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setTaskName(e.target.value);
-              }}
-              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                submitOnEnter(e, addNewTaskHandler)
-              }
-            />
-            <Button
-              variant="contained"
-              sx={{
-                background: "#d3cdf1",
-                color: "#5030E5",
-                marginLeft: "8px",
-              }}
-              onClick={addNewTaskHandler}
-            >
-              Done
-            </Button>
-          </Box>
-        )}
       </div>
       <Box
         sx={{

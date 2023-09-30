@@ -42,7 +42,7 @@ export const UserTasks = () => {
           id: "13",
         },
       ],
-      color: "#8BC48A",
+      color: "#1E293B",
     },
     {
       id: "2",
@@ -128,41 +128,6 @@ export const UserTasks = () => {
     },
     {
       id: "4",
-      name: "QA",
-      tasks: [
-        {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: v4uuid(),
-          hidden: true,
-        },
-        {
-          name: "1234",
-          description:
-            "Low fidelity wireframes include the most basic content and visuals.",
-          status: PRIORITY_ENUM.HIGH,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
-          id: "18",
-        },
-        {
-          name: "2225",
-          description:
-            "Low fidelity wireframes include the most basic content and visuals.",
-          status: PRIORITY_ENUM.MEDIUM,
-          author: { id: "12", firstName: "Cindy", secondName: "Baker" },
-          executor: { id: "12", firstName: "Remy", secondName: "Sharp" },
-          id: "19",
-        },
-      ],
-      color: "#8BC48A",
-    },
-    {
-      id: "5",
       name: "Done",
       tasks: [
         {
@@ -195,6 +160,41 @@ export const UserTasks = () => {
         },
       ],
       color: "#8BC48A",
+    },
+    {
+      id: "5",
+      name: "QA",
+      tasks: [
+        {
+          name: "1234",
+          description:
+            "Brainstorming brings team members' diverse experience into play.",
+          status: PRIORITY_ENUM.LOW,
+          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          id: v4uuid(),
+          hidden: true,
+        },
+        {
+          name: "1234",
+          description:
+            "Low fidelity wireframes include the most basic content and visuals.",
+          status: PRIORITY_ENUM.HIGH,
+          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
+          executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
+          id: "18",
+        },
+        {
+          name: "2225",
+          description:
+            "Low fidelity wireframes include the most basic content and visuals.",
+          status: PRIORITY_ENUM.MEDIUM,
+          author: { id: "12", firstName: "Cindy", secondName: "Baker" },
+          executor: { id: "12", firstName: "Remy", secondName: "Sharp" },
+          id: "19",
+        },
+      ],
+      color: "#33BFFF",
     },
   ]);
 

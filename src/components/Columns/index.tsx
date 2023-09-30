@@ -96,8 +96,8 @@ export const Columns = ({ columns, setColumns }: ColumnsProps) => {
       sx={{
         display: "flex",
         flexDirection: "row",
-        gap: "50px",
-        alignItems: "center",
+        gap: "20px",
+        alignItems: "flex-start",
         padding: "40px",
       }}
     >

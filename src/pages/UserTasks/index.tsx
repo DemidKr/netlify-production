@@ -5,6 +5,7 @@ import { Columns } from "../../components/Columns";
 import type { ColumnType } from "../../components/Column";
 import { Box } from "@mui/material";
 import { PRIORITY_ENUM } from "../../entities";
+import { MainWrapper } from "../../components";
 
 export const UserTasks = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
@@ -198,10 +199,10 @@ export const UserTasks = () => {
   ]);
 
   return (
-    <>
+    <MainWrapper>
       <Box>
         <Columns columns={columns} setColumns={setColumns} />
       </Box>
-    </>
+    </MainWrapper>
   );
 };

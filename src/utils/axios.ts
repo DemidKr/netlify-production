@@ -1,14 +1,17 @@
 import axios from "axios";
 
 const api = () => {
-  // const token = localStorage.getItem("access_token") ?? "12331";
+  const token = localStorage.getItem("access_token") ?? "12331";
 
   return axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
-    withCredentials: false,
+    // withCredentials: false,
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      // bearer: token,
+      bearer: token,
+      "Content-Type": "application/json",
+      Accept: "*/*",
+      "Cache-Control": "no-cache",
+      "Access-Control-Allow-Origin": "*",
     },
   });
 };

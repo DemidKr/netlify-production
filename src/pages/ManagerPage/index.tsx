@@ -7,6 +7,15 @@ import { DeleteTaskModal } from "./modals";
 import { PRIORITY_ENUM } from "../../entities";
 import { CreateTaskModal } from "./modals/CreateTaskModal";
 
+const EMPTY_TASK = {
+  name: "",
+  description: "",
+  status: PRIORITY_ENUM.LOW,
+  author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
+  executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+  hidden: true,
+};
+
 export const ManagerPage = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
     {
@@ -14,14 +23,8 @@ export const ManagerPage = () => {
       name: "Backlog",
       tasks: [
         {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          ...EMPTY_TASK,
           id: v4uuid(),
-          hidden: true,
         },
         {
           name: "1234",
@@ -49,14 +52,8 @@ export const ManagerPage = () => {
       name: "To Do",
       tasks: [
         {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          ...EMPTY_TASK,
           id: v4uuid(),
-          hidden: true,
         },
         {
           name: "Onboarding Illustrations ",
@@ -92,14 +89,8 @@ export const ManagerPage = () => {
       name: "In Progress",
       tasks: [
         {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          ...EMPTY_TASK,
           id: v4uuid(),
-          hidden: true,
         },
         {
           name: "Brainstorming",
@@ -131,14 +122,8 @@ export const ManagerPage = () => {
       name: "QA",
       tasks: [
         {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          ...EMPTY_TASK,
           id: v4uuid(),
-          hidden: true,
         },
         {
           name: "1234",
@@ -166,14 +151,8 @@ export const ManagerPage = () => {
       name: "Done",
       tasks: [
         {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          ...EMPTY_TASK,
           id: v4uuid(),
-          hidden: true,
         },
         {
           name: "1234",

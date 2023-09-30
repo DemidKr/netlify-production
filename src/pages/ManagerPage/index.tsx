@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { CreateTaskModal, DeleteTaskModal } from "./modals";
+import { MainWrapper } from '../../components';
+import { CreateTaskModal, DeleteTaskModal } from './modals';
 
 export const ManagerPage = () => {
-  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(true);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
 
   return (
-    <>
+    <MainWrapper>
       <h1>Hello world</h1>
 
       <CreateTaskModal
@@ -20,6 +21,6 @@ export const ManagerPage = () => {
         onClose={() => setShowDeleteTaskModal(false)}
         taskId="123"
       />
-    </>
+    </MainWrapper>
   );
 };

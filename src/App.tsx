@@ -1,6 +1,6 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { UserTasks, Login, ManagerPage } from "./pages";
+import { UserTasks, Login, ManagerPage } from './pages';
 
 export const App = () => {
   const hasAccessToken = true;

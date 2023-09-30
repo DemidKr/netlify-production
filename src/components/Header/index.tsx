@@ -1,9 +1,9 @@
-import { AppBar, Menu, Toolbar } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import { AccountCircle } from "@mui/icons-material";
-import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+import { AppBar, Menu, Toolbar } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import { AccountCircle } from '@mui/icons-material';
+import MenuItem from '@mui/material/MenuItem';
+import { useState } from 'react';
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -17,7 +17,7 @@ export const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ height: '62px' }}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Task Manager
@@ -37,13 +37,13 @@ export const Header = () => {
             id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: 'top',
+              horizontal: 'right',
             }}
             keepMounted
             transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
+              vertical: 'top',
+              horizontal: 'right',
             }}
             open={Boolean(anchorEl)}
             onClose={handleClose}

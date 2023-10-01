@@ -15,6 +15,7 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { ColumnType, TaskType } from "../../entities";
 import { Card } from "./components/Column/components/Card";
 import { Column } from "./components/Column";
+import api from "../../utils/axios";
 
 type ColumnsProps = {
   columns: ColumnType[];
@@ -55,6 +56,7 @@ export const Columns = ({
   const handleDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     const { active, over } = event;
+    console.log("active, over", active, over);
 
     if (over && active.id !== over.id) {
       const activeColumnIndex = columns.findIndex((column) =>
@@ -90,6 +92,11 @@ export const Columns = ({
               newColumnTaskHoverIndex,
             );
           }
+
+          api().post("/task", {
+            ...activeTask,
+            statusId: newColumnIndex,
+          });
         }
       }
 

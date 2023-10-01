@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as v4uuid } from "uuid";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { AxiosResponse } from "axios";
 
-import { Columns, ColumnType, MainWrapper } from "../../components";
-import { DeleteTaskModal } from "./modals";
-import { PRIORITY_ENUM } from "../../entities";
+import { Columns, MainWrapper } from "../../components";
+import { DeleteTaskModal, StartSprintModal } from "./modals";
+import { PRIORITY_ENUM, TaskType, ColumnType } from "../../entities";
 import { CreateTaskModal } from "./modals/CreateTaskModal";
+import api from "../../utils/axios";
 
 const EMPTY_TASK = {
   name: "",
@@ -17,6 +19,7 @@ const EMPTY_TASK = {
 };
 
 export const ManagerPage = () => {
+  const requested = useRef(false);
   const [columns, setColumns] = useState<ColumnType[]>([
     {
       id: "1",
@@ -25,24 +28,6 @@ export const ManagerPage = () => {
         {
           ...EMPTY_TASK,
           id: v4uuid(),
-        },
-        {
-          name: "1234",
-          description:
-            "Brainstorming brings team members' diverse experience into play.",
-          status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "12",
-        },
-        {
-          name: "2225",
-          description:
-            "Low fidelity wireframes include the most basic content and visuals.",
-          status: PRIORITY_ENUM.MEDIUM,
-          author: { id: "12", firstName: "Dmitry", secondName: "Pupkin" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
-          id: "13",
         },
       ],
       color: "#1E293B",
@@ -179,10 +164,53 @@ export const ManagerPage = () => {
 
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+  const [showStartSprintModal, setShowStartSprintModal] = useState(false);
+
+  useEffect(() => {
+    // api()
+    //   .get('/sprint/1/tasks')
+    //   .then((body: AxiosResponse<TaskType[]>) => {
+    //     if (body?.data) {
+    //       console.log('body?.data', body?.data);
+    //     }
+    //   });
+    if (!requested.current) {
+      api()
+        .get("/task/all")
+        .then((body: AxiosResponse<TaskType[]>) => {
+          if (body?.data) {
+            // setColumns(prevColumns => {
+            //   prevColumns[0].tasks = [
+            //     {
+            //       ...EMPTY_TASK,
+            //       id: v4uuid(),
+            //     },
+            //     ...body?.data,
+            //   ];
+            //   console.log('prevColumns', prevColumns);
+            //   return prevColumns;
+            // });
+          }
+        });
+
+      requested.current = true;
+    }
+  }, []);
 
   return (
     <MainWrapper>
-      <Box>
+      <Box display="flex" flexDirection="column" p="12px">
+        <Box display="flex" justifyContent="flex-end">
+          <Button
+            onClick={() => setShowStartSprintModal(true)}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            Закончить спринт
+          </Button>
+        </Box>
+
         <Columns
           columns={columns}
           setColumns={setColumns}
@@ -199,6 +227,11 @@ export const ManagerPage = () => {
       <CreateTaskModal
         show={showCreateTaskModal}
         onClose={() => setShowCreateTaskModal(false)}
+      />
+
+      <StartSprintModal
+        show={showStartSprintModal}
+        onClose={() => setShowStartSprintModal(false)}
       />
     </MainWrapper>
   );

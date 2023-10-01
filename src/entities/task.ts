@@ -15,6 +15,10 @@ export interface TaskType {
   author: IUser;
   executor: IUser;
   hidden?: boolean;
+  deadline?: string;
+  priority_id?: string;
+  executor_id?: string;
+  estimate?: string;
 }
 
 export const PRIORITIES_TASK = [

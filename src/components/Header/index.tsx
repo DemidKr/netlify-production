@@ -24,7 +24,14 @@ export const Header = () => {
 
   const handleLogout = () => {
     handleClose();
-    api().get("/user/logout");
+    api()
+      .get("/user/logout")
+      .then(() => {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("user");
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
+      });
   };
 
   return (

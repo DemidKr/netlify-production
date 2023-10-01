@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Box from "@mui/material/Box";
-import { PRIORITIES_TASK, PRIORITY_ENUM } from "../../../entities";
+import { PRIORITIES_TASK, PRIORITY_ENUM } from "../../../../../entities";
 
 type IProps = {
   status: PRIORITY_ENUM;

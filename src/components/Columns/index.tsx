@@ -1,6 +1,4 @@
-import { Column, type ColumnType } from "../Column";
 import { Box } from "@mui/material";
-
 import {
   closestCenter,
   DndContext,
@@ -12,9 +10,11 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { useState } from "react";
-import { TaskType } from "../../entities";
 import { arrayMove } from "@dnd-kit/sortable";
-import { Card } from "../Column/components/Card";
+
+import { ColumnType, TaskType } from "../../entities";
+import { Card } from "./components/Column/components/Card";
+import { Column } from "./components/Column";
 
 type ColumnsProps = {
   columns: ColumnType[];
@@ -101,6 +101,7 @@ export const Columns = ({
       sx={{
         display: "flex",
         flexDirection: "row",
+        flexWrap: "wrap",
         gap: "20px",
         alignItems: "flex-start",
         padding: "40px",

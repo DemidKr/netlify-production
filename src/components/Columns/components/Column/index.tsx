@@ -3,18 +3,11 @@ import Typography from "@mui/material/Typography";
 
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 
-import { TaskType } from "../../entities";
+import { ColumnType } from "../../../../entities";
 import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
 import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
 import { Card } from "./components/Card";
 import { AddButton } from "./components/AddButton";
-
-export type ColumnType = {
-  id: string;
-  name: string;
-  tasks: TaskType[];
-  color: string;
-};
 
 type IProps = {
   columns: ColumnType[];

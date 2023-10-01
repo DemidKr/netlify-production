@@ -7,7 +7,7 @@ const api = () => {
     baseURL: process.env.REACT_APP_SERVER_URL,
     // withCredentials: false,
     headers: {
-      bearer: token,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
       Accept: "*/*",
       "Cache-Control": "no-cache",

@@ -1,7 +1,7 @@
+import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import Box from "@mui/material/Box";
 import { CSS } from "@dnd-kit/utilities";
-import React from "react";
 
 type DraggableTaskWrapperProps = {
   id: string;

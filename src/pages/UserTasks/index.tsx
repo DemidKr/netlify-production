@@ -2,9 +2,8 @@ import { useState } from "react";
 import { v4 as v4uuid } from "uuid";
 
 import { Columns } from "../../components/Columns";
-import type { ColumnType } from "../../components/Column";
 import { Box } from "@mui/material";
-import { PRIORITY_ENUM } from "../../entities";
+import { PRIORITY_ENUM, ColumnType } from "../../entities";
 import { MainWrapper } from "../../components";
 
 export const UserTasks = () => {

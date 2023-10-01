@@ -6,9 +6,10 @@ import { useState } from "react";
 
 type IProps = {
   deleteCard: () => void;
+  onUpdateTask: () => void;
 };
 
-export const CardMenu = ({ deleteCard }: IProps) => {
+export const CardMenu = ({ deleteCard, onUpdateTask }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -19,6 +20,10 @@ export const CardMenu = ({ deleteCard }: IProps) => {
   };
   const deleteTaskHandler = () => {
     deleteCard();
+    setAnchorEl(null);
+  };
+  const handleUpdateTask = () => {
+    onUpdateTask();
     setAnchorEl(null);
   };
 
@@ -52,7 +57,7 @@ export const CardMenu = ({ deleteCard }: IProps) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Редактировать</MenuItem>
+        <MenuItem onClick={handleUpdateTask}>Редактировать</MenuItem>
         <MenuItem onClick={deleteTaskHandler}>Удалить</MenuItem>
       </Menu>
     </div>

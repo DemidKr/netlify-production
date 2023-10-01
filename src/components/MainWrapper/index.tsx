@@ -8,13 +8,7 @@ interface IProps {
 
 export const MainWrapper = ({ children }: IProps) => {
   return (
-    <Box
-      width="100%"
-      height="100vh"
-      sx={{
-        overflowY: "hidden",
-      }}
-    >
+    <Box width="100%" height="100vh">
       <Header />
 
       <Box width="100%" height="max-content">

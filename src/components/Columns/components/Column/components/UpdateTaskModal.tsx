@@ -1,89 +1,62 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import api from "../../../utils/axios";
-import { CustomSelect, ModalWindow } from "../../../components/index";
-import { BASIC_DATE_FORMAT } from "../../../constants";
-import { IProperty, ISelectItem } from "../../../entities";
-import { IUser } from "../../../entities/user";
-import { AxiosResponse } from "axios";
+import api from "../../../../../utils/axios";
+import { CustomSelect, ModalWindow } from "../../../../index";
+import { BASIC_DATE_FORMAT } from "../../../../../constants";
+import {
+  PRIORITIES_TASK,
+  PRIORITY_ENUM,
+  TaskType,
+} from "../../../../../entities";
+
+const MOCK_EXECUTOR = [
+  { name: "Иван Иванович", code: "123" },
+  { name: "Петр Петрович", code: "51234" },
+  { name: "Никита Сергеевич", code: "9123333" },
+  { name: "Алексей Михайлович", code: "5444" },
+];
 
 interface IProps {
   show: boolean;
   onClose: () => void;
+  task: TaskType;
 }
 
-export const CreateTaskModal = ({ show, onClose }: IProps) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
+  const [name, setName] = useState(task.name ?? "");
+  const [description, setDescription] = useState(task.description ?? "");
   const [deadline, setDeadline] = useState<Dayjs | null>(
-    dayjs().add(14, "day"),
+    task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"),
   );
-  const [priority, setPriority] = useState("3");
-  const [executor, setExecutor] = useState("");
-  const [estimate, setEstimate] = useState(0);
-  const [executors, setExecutors] = useState<ISelectItem[]>([]);
-  const [priorities, setPriorities] = useState<ISelectItem[]>([]);
+  const [priority, setPriority] = useState(
+    task.priority_id ?? PRIORITY_ENUM.MEDIUM,
+  );
+  const [executor, setExecutor] = useState(task.executor_id ?? "");
+  const [estimate, setEstimate] = useState(task.estimate ?? 0);
 
   const handleSubmit = () => {
-    const daysUntilDeadline = dayjs(deadline).diff(dayjs(), "days") + 1;
-
     api()
-      .post("/task", {
+      .put(`/task/${task.id}`, {
         name,
         description,
-        deadline_at: dayjs(deadline).format(BASIC_DATE_FORMAT),
+        deadline_at: deadline,
+        priority_id: priority,
         executor_id: executor,
         estimate,
-        days_until_deadline: daysUntilDeadline,
-        priority_id: +priority,
-        status_id: 1,
-        added_information: "",
+        blocker_task_ids: "[]",
+        related_task_ids: "[]",
+        added_information: "[]",
+        status_id: "1",
+        team_id: "1",
       })
       .then(() => {
         onClose();
       });
   };
-
-  useEffect(() => {
-    if (show) {
-      // получаем участников команды
-      api()
-        .get("/team/developers")
-        .then((body: AxiosResponse<IUser[]>) => {
-          if (body?.data) {
-            setExecutors(
-              body.data.map((executor) => ({
-                code: executor.id,
-                name: executor.first_name ?? "",
-              })),
-            );
-          }
-        });
-
-      // получает enum приоритетов
-      api()
-        .get("/priorities")
-        .then((body: AxiosResponse<IProperty[]>) => {
-          if (body?.data) {
-            setPriorities(
-              body.data.map((priority) => ({
-                code: priority.id,
-                name: priority.label,
-              })),
-            );
-          }
-        });
-    }
-
-    return () => {
-      setExecutors([]);
-      setPriorities([]);
-    };
-  }, [show]);
 
   return (
     <ModalWindow
@@ -138,8 +111,8 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
             value={priority}
             labelId="priority-label"
             label="Приоритет"
-            onSelect={setPriority}
-            items={priorities}
+            onSelect={(value) => setPriority(value as PRIORITY_ENUM)}
+            items={PRIORITIES_TASK}
           />
         </Box>
 
@@ -150,7 +123,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
           labelId="executor-label"
           label="Исполнитель"
           onSelect={setExecutor}
-          items={executors}
+          items={MOCK_EXECUTOR}
         />
 
         <TextField

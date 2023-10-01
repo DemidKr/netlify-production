@@ -1,10 +1,10 @@
-import { IUser } from "./user";
+import { IUser } from './user';
 
 export enum PRIORITY_ENUM {
-  HOT = "hot",
-  HIGH = "high",
-  MEDIUM = "medium",
-  LOW = "low",
+  HOT = 'hot',
+  HIGH = 'high',
+  MEDIUM = 'medium',
+  LOW = 'low',
 }
 
 export interface TaskType {
@@ -25,11 +25,12 @@ export interface TaskType {
   sprint_id?: string;
   added_information?: string;
   hours?: string;
+  status_id?: number;
 }
 
 export const PRIORITIES_TASK = [
-  { name: "Очень высокий", code: PRIORITY_ENUM.HOT },
-  { name: "Высокий", code: PRIORITY_ENUM.HIGH },
-  { name: "Средний", code: PRIORITY_ENUM.MEDIUM },
-  { name: "Низкий", code: PRIORITY_ENUM.LOW },
+  { name: 'Очень высокий', code: PRIORITY_ENUM.HOT },
+  { name: 'Высокий', code: PRIORITY_ENUM.HIGH },
+  { name: 'Средний', code: PRIORITY_ENUM.MEDIUM },
+  { name: 'Низкий', code: PRIORITY_ENUM.LOW },
 ];

@@ -4,7 +4,7 @@ import { Box, Button } from "@mui/material";
 import { AxiosResponse } from "axios";
 
 import { Columns, MainWrapper } from "../../components";
-import { DeleteTaskModal, StartSprintModal } from "./modals";
+import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from "./modals";
 import { PRIORITY_ENUM, TaskType, ColumnType, ISprint } from "../../entities";
 import { CreateTaskModal } from "./modals/CreateTaskModal";
 import api from "../../utils/axios";
@@ -81,6 +81,8 @@ export const ManagerPage = () => {
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
   const [showStartSprintModal, setShowStartSprintModal] = useState(false);
+  const [showUpdateTask, setShowUpdateTask] = useState(false);
+  const [updateTaskItem, setUpdateTaskItem] = useState<TaskType | null>(null);
 
   const targetTasks = useMemo(
     () =>
@@ -163,6 +165,8 @@ export const ManagerPage = () => {
           columns={columns}
           setColumns={setColumns}
           setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
+          setShowUpdateTaskModal={() => setShowCreateTaskModal(true)}
+          setUpdateTaskItem={setUpdateTaskItem}
         />
       </Box>
 
@@ -182,6 +186,14 @@ export const ManagerPage = () => {
         onClose={() => setShowStartSprintModal(false)}
         targetTasks={targetTasks}
       />
+
+      {updateTaskItem && (
+        <UpdateTaskModal
+          show={showUpdateTask}
+          onClose={() => setShowUpdateTask(false)}
+          task={updateTaskItem}
+        />
+      )}
     </MainWrapper>
   );
 };

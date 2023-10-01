@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 
-import { ColumnType } from "../../../../entities";
+import { ColumnType, TaskType } from "../../../../entities";
 import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
 import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
 import { Card } from "./components/Card";
@@ -15,6 +15,8 @@ type IProps = {
   currentColumnIndex: number;
   setColumns: (columns: ColumnType[]) => void;
   setShowCreateTaskModal?: () => void;
+  setShowUpdateTaskModal?: () => void;
+  setUpdateTaskItem?: (task: TaskType) => void;
 };
 
 export const Column = ({
@@ -23,6 +25,8 @@ export const Column = ({
   currentColumnIndex,
   setColumns,
   setShowCreateTaskModal,
+  setShowUpdateTaskModal,
+  setUpdateTaskItem,
 }: IProps) => {
   const deleteTaskHandler = (deleteIndex: number) => {
     const deletedTaskArray = currentColumn.tasks.filter(
@@ -135,6 +139,8 @@ export const Column = ({
                   <Card
                     task={task}
                     deleteCard={() => deleteTaskHandler(index)}
+                    setShowUpdateTaskModal={setShowUpdateTaskModal}
+                    setUpdateTaskItem={setUpdateTaskItem}
                   />
                 </DraggableTaskWrapper>
               );

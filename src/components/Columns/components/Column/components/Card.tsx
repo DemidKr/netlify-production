@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import { Status } from "./Status";
 import { CardMenu } from "./CardMenu";
@@ -7,16 +6,20 @@ import { Stack } from "@mui/material";
 
 import { BackgroundLetterAvatars } from "../../../../BackgroundLetterAvatars";
 import { TaskType } from "../../../../../entities";
-// import { UpdateTaskModal } from './UpdateTaskModal';
 
 interface IProps {
   task: TaskType;
   deleteCard: () => void;
+  setShowUpdateTaskModal?: () => void;
+  setUpdateTaskItem?: (task: TaskType) => void;
 }
 
-export const Card = ({ task, deleteCard }: IProps) => {
-  const [_showUpdateTask, setShowUpdateTask] = useState(false);
-
+export const Card = ({
+  task,
+  deleteCard,
+  setShowUpdateTaskModal,
+  setUpdateTaskItem,
+}: IProps) => {
   return (
     <>
       <Box
@@ -29,7 +32,10 @@ export const Card = ({ task, deleteCard }: IProps) => {
         <Status status={task.status} />
         <CardMenu
           deleteCard={deleteCard}
-          onUpdateTask={() => setShowUpdateTask(true)}
+          onUpdateTask={() => {
+            setShowUpdateTaskModal?.();
+            setUpdateTaskItem?.(task);
+          }}
         />
       </Box>
       <Typography
@@ -79,12 +85,6 @@ export const Card = ({ task, deleteCard }: IProps) => {
           />
         </Stack>
       </Box>
-
-      {/* <UpdateTaskModal
-        show={showUpdateTask}
-        onClose={() => setShowUpdateTask(false)}
-        task={task}
-      /> */}
     </>
   );
 };

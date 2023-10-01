@@ -1,17 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import api from "../../../../../utils/axios";
-import { CustomSelect, ModalWindow } from "../../../../index";
-import { BASIC_DATE_FORMAT } from "../../../../../constants";
-import {
-  PRIORITIES_TASK,
-  PRIORITY_ENUM,
-  TaskType,
-} from "../../../../../entities";
+import api from "../../../utils/axios";
+import { CustomSelect, ModalWindow } from "../../../components";
+import { BASIC_DATE_FORMAT } from "../../../constants";
+import { PRIORITIES_TASK, PRIORITY_ENUM, TaskType } from "../../../entities";
 
 const MOCK_EXECUTOR = [
   { name: "Иван Иванович", code: "123" },
@@ -39,24 +35,33 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
   const [estimate, setEstimate] = useState(task.estimate ?? 0);
 
   const handleSubmit = () => {
+    const daysUntilDeadline = dayjs(deadline).diff(dayjs(), "days") + 1;
+
     api()
       .put(`/task/${task.id}`, {
         name,
         description,
-        deadline_at: deadline,
-        priority_id: priority,
+        deadline_at: dayjs(deadline).format(BASIC_DATE_FORMAT),
         executor_id: executor,
         estimate,
-        blocker_task_ids: "[]",
-        related_task_ids: "[]",
-        added_information: "[]",
-        status_id: "1",
-        team_id: "1",
+        days_until_deadline: daysUntilDeadline,
+        priority_id: +priority,
       })
       .then(() => {
         onClose();
       });
   };
+
+  useEffect(() => {
+    setName(task.name ?? "");
+    setDescription(task.description ?? "");
+    setDeadline(task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"));
+    setPriority(task.priority_id ?? PRIORITY_ENUM.MEDIUM);
+    setExecutor(task.executor_id ?? "");
+    setEstimate(task.estimate ?? 0);
+  }, [task]);
+
+  console.log("name", name, "descrip", description);
 
   return (
     <ModalWindow

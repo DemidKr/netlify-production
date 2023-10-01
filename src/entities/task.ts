@@ -19,6 +19,12 @@ export interface TaskType {
   priority_id?: string;
   executor_id?: string;
   estimate?: string;
+  team_id?: string;
+  start_at?: string;
+  deadline_at?: string;
+  sprint_id?: string;
+  added_information?: string;
+  hours?: string;
 }
 
 export const PRIORITIES_TASK = [

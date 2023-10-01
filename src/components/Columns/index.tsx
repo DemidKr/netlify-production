@@ -21,12 +21,16 @@ type ColumnsProps = {
   columns: ColumnType[];
   setColumns: (columns: ColumnType[]) => void;
   setShowCreateTaskModal?: () => void;
+  setShowUpdateTaskModal?: () => void;
+  setUpdateTaskItem?: (task: TaskType) => void;
 };
 
 export const Columns = ({
   columns,
   setColumns,
   setShowCreateTaskModal,
+  setShowUpdateTaskModal,
+  setUpdateTaskItem,
 }: ColumnsProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const isDesktop = useMediaQuery("(min-width:600px)");
@@ -68,7 +72,9 @@ export const Columns = ({
       );
 
       const copyColumnsArray = JSON.parse(JSON.stringify(columns));
-      const activeTask = findActiveTask(String(active.id ?? ""));
+      const activeTask = columns[activeColumnIndex]?.tasks?.find(
+        (task) => task.id === active.id,
+      );
       if (activeTask) {
         if (activeTask.hidden) {
           copyColumnsArray[newColumnIndex].tasks.push(activeTask);
@@ -93,9 +99,9 @@ export const Columns = ({
             );
           }
 
-          api().post("/task", {
-            ...activeTask,
-            statusId: newColumnIndex,
+          // eslint-disable-next-line
+          api().put(`/task/${activeTask.id}`, {
+            status_id: newColumnIndex + 1,
           });
         }
       }
@@ -130,6 +136,8 @@ export const Columns = ({
             currentColumn={column}
             setColumns={setColumns}
             setShowCreateTaskModal={setShowCreateTaskModal}
+            setShowUpdateTaskModal={setShowUpdateTaskModal}
+            setUpdateTaskItem={setUpdateTaskItem}
           />
         ))}
         <DragOverlay>

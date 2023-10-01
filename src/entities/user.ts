@@ -1,7 +1,5 @@
 export interface IUser {
   id: string;
-  firstName: string; // TODO удалить
-  secondName: string; // TODO удалить
   first_name?: string;
   second_name?: string;
   middle_name?: string;

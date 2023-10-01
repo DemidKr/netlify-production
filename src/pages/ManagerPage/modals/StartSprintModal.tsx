@@ -9,13 +9,15 @@ import Button from "@mui/material/Button";
 import { BASIC_DATE_FORMAT } from "../../../constants";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
+import { ISelectItem } from "../../../entities";
 
 interface IProps {
   show: boolean;
   onClose: () => void;
+  targetTasks: ISelectItem[];
 }
 
-export const StartSprintModal = ({ show, onClose }: IProps) => {
+export const StartSprintModal = ({ show, onClose, targetTasks }: IProps) => {
   const [name, setName] = useState("");
   const [deadline, setDeadline] = useState<Dayjs | null>(
     dayjs().add(14, "day"),
@@ -37,7 +39,7 @@ export const StartSprintModal = ({ show, onClose }: IProps) => {
     api()
       .post("/sprint", {
         name,
-        target_task_ids: [2],
+        target_task_ids: [targetTask],
         deadline_at: dayjs(deadline).format(BASIC_DATE_FORMAT),
         days_until_deadline: daysUntilDeadline,
         estimate: 400,
@@ -110,9 +112,9 @@ export const StartSprintModal = ({ show, onClose }: IProps) => {
               fullWidth
               value={targetTask}
               labelId="priority-label"
-              label="Целевые задачи"
+              label="Целевая задача"
               onSelect={setTargetTask}
-              items={[{ code: "1", name: "test" }]}
+              items={targetTasks}
             />
           </Box>
         )}

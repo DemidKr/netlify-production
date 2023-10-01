@@ -107,7 +107,7 @@ export const Column = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          maxHeight: "calc(100vh - 204px)",
+          maxHeight: "calc(100vh - 286px)",
           padding: "10px",
           overflowY: "auto",
         }}

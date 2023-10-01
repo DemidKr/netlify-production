@@ -40,11 +40,11 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
         estimate,
         days_until_deadline: daysUntilDeadline,
         priority_id: +priority,
-        status_id: 1,
-        added_information: "",
       })
       .then(() => {
         onClose();
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       });
   };
 

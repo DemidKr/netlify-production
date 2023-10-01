@@ -17,8 +17,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: v4uuid(),
           hidden: true,
         },
@@ -27,8 +27,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: "12",
         },
         {
@@ -36,8 +36,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.MEDIUM,
-          author: { id: "12", firstName: "Dmitry", secondName: "Pupkin" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Pupkin" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: "13",
         },
       ],
@@ -52,8 +52,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: v4uuid(),
           hidden: true,
         },
@@ -62,11 +62,11 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HIGH,
-          author: { id: "12", firstName: "Remy", secondName: "Sharp" },
+          author: { id: "12", first_name: "Remy", second_name: "Sharp" },
           executor: {
             id: "23",
-            firstName: "Travis",
-            secondName: "Howard",
+            first_name: "Travis",
+            second_name: "Howard",
           },
           id: "14",
         },
@@ -75,11 +75,11 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.MEDIUM,
-          author: { id: "12", firstName: "Cindy", secondName: "Baker" },
+          author: { id: "12", first_name: "Cindy", second_name: "Baker" },
           executor: {
             id: "23",
-            firstName: "Travis",
-            secondName: "Howard",
+            first_name: "Travis",
+            second_name: "Howard",
           },
           id: "11231235",
         },
@@ -95,8 +95,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: v4uuid(),
           hidden: true,
         },
@@ -105,11 +105,11 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Olegov" },
           executor: {
             id: "23",
-            firstName: "Travis",
-            secondName: "Howard",
+            first_name: "Travis",
+            second_name: "Howard",
           },
           id: "16",
         },
@@ -118,8 +118,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HOT,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Olegov" },
+          executor: { id: "12", first_name: "Cindy", second_name: "Baker" },
           id: "17",
         },
       ],
@@ -134,8 +134,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: v4uuid(),
           hidden: true,
         },
@@ -144,8 +144,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HIGH,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "12", firstName: "Cindy", secondName: "Baker" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Olegov" },
+          executor: { id: "12", first_name: "Cindy", second_name: "Baker" },
           id: "18",
         },
         {
@@ -153,8 +153,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.MEDIUM,
-          author: { id: "12", firstName: "Cindy", secondName: "Baker" },
-          executor: { id: "12", firstName: "Remy", secondName: "Sharp" },
+          author: { id: "12", first_name: "Cindy", second_name: "Baker" },
+          executor: { id: "12", first_name: "Remy", second_name: "Sharp" },
           id: "19",
         },
       ],
@@ -169,8 +169,8 @@ export const UserTasks = () => {
           description:
             "Brainstorming brings team members' diverse experience into play.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Oleg", secondName: "Petrov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: v4uuid(),
           hidden: true,
         },
@@ -179,8 +179,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.LOW,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Olegov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: "20",
         },
         {
@@ -188,8 +188,8 @@ export const UserTasks = () => {
           description:
             "Low fidelity wireframes include the most basic content and visuals.",
           status: PRIORITY_ENUM.HOT,
-          author: { id: "12", firstName: "Dmitry", secondName: "Olegov" },
-          executor: { id: "23", firstName: "Ryan", secondName: "Gosling" },
+          author: { id: "12", first_name: "Dmitry", second_name: "Olegov" },
+          executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
           id: "21",
         },
       ],

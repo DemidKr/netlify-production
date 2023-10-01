@@ -70,12 +70,12 @@ export const Card = ({ task, deleteCard }: IProps) => {
       >
         <Stack direction="row" spacing={1}>
           <BackgroundLetterAvatars
-            firstName={task.author.firstName}
-            secondName={task.author.secondName}
+            firstName={task.author.first_name ?? ""}
+            secondName={task.author.second_name ?? ""}
           />
           <BackgroundLetterAvatars
-            firstName={task.executor.firstName}
-            secondName={task.executor.secondName}
+            firstName={task.executor.first_name ?? ""}
+            secondName={task.executor.second_name ?? ""}
           />
         </Stack>
       </Box>

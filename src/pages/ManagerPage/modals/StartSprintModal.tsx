@@ -46,6 +46,8 @@ export const StartSprintModal = ({ show, onClose, targetTasks }: IProps) => {
       })
       .then(() => {
         handleClose();
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       });
   };
 

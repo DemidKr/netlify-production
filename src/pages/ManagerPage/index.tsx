@@ -1,20 +1,20 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { v4 as v4uuid } from 'uuid';
-import { Box, Button } from '@mui/material';
-import { AxiosResponse } from 'axios';
+import { useEffect, useMemo, useRef, useState } from "react";
+import { v4 as v4uuid } from "uuid";
+import { Box, Button } from "@mui/material";
+import { AxiosResponse } from "axios";
 
-import { Columns, MainWrapper } from '../../components';
-import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from './modals';
-import { PRIORITY_ENUM, TaskType, ColumnType, ISprint } from '../../entities';
-import { CreateTaskModal } from './modals/CreateTaskModal';
-import api from '../../utils/axios';
+import { Columns, MainWrapper } from "../../components";
+import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from "./modals";
+import { PRIORITY_ENUM, TaskType, ColumnType, ISprint } from "../../entities";
+import { CreateTaskModal } from "./modals/CreateTaskModal";
+import api from "../../utils/axios";
 
 const EMPTY_TASK = {
-  name: '',
-  description: '',
+  name: "",
+  description: "",
   status: PRIORITY_ENUM.LOW,
-  author: { id: '12', first_name: 'Oleg', second_name: 'Petrov' },
-  executor: { id: '23', first_name: 'Ryan', second_name: 'Gosling' },
+  author: { id: "12", first_name: "Oleg", second_name: "Petrov" },
+  executor: { id: "23", first_name: "Ryan", second_name: "Gosling" },
   hidden: true,
 };
 
@@ -22,59 +22,59 @@ export const ManagerPage = () => {
   const requested = useRef(false);
   const [columns, setColumns] = useState<ColumnType[]>([
     {
-      id: '1',
-      name: 'Backlog',
+      id: "1",
+      name: "Backlog",
       tasks: [
         {
           ...EMPTY_TASK,
           id: v4uuid(),
         },
       ],
-      color: '#1E293B',
+      color: "#1E293B",
     },
     {
-      id: '2',
-      name: 'To Do',
+      id: "2",
+      name: "To Do",
       tasks: [
         {
           ...EMPTY_TASK,
           id: v4uuid(),
         },
       ],
-      color: '#5030E5',
+      color: "#5030E5",
     },
     {
-      id: '3',
-      name: 'In Progress',
+      id: "3",
+      name: "In Progress",
       tasks: [
         {
           ...EMPTY_TASK,
           id: v4uuid(),
         },
       ],
-      color: '#FFA500',
+      color: "#FFA500",
     },
     {
-      id: '4',
-      name: 'QA',
+      id: "4",
+      name: "QA",
       tasks: [
         {
           ...EMPTY_TASK,
           id: v4uuid(),
         },
       ],
-      color: '#33BFFF',
+      color: "#33BFFF",
     },
     {
-      id: '5',
-      name: 'Done',
+      id: "5",
+      name: "Done",
       tasks: [
         {
           ...EMPTY_TASK,
           id: v4uuid(),
         },
       ],
-      color: '#8BC48A',
+      color: "#8BC48A",
     },
   ]);
 
@@ -87,7 +87,7 @@ export const ManagerPage = () => {
   const targetTasks = useMemo(
     () =>
       columns[0]?.tasks?.length > 0
-        ? columns[0]?.tasks?.map(task => ({
+        ? columns[0]?.tasks?.map((task) => ({
             code: task.id,
             name: task.name,
           }))
@@ -98,7 +98,7 @@ export const ManagerPage = () => {
   useEffect(() => {
     if (!requested.current) {
       api()
-        .get('/sprint/all')
+        .get("/sprint/all")
         .then((body: AxiosResponse<ISprint[]>) => {
           if (body?.data?.length > 0) {
             //получили текущий спринт
@@ -108,7 +108,7 @@ export const ManagerPage = () => {
                 if (body?.data) {
                   //получили задачи текущего спринта
                   //сетим для туду столбца все новые задачи
-                  setColumns(prevColumns => {
+                  setColumns((prevColumns) => {
                     const newColumns = JSON.parse(JSON.stringify(prevColumns));
 
                     newColumns[1].tasks = [
@@ -116,7 +116,7 @@ export const ManagerPage = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter(task => task.status_id === 2),
+                      ...body?.data.filter((task) => task.status_id === 2),
                     ];
 
                     newColumns[2].tasks = [
@@ -124,7 +124,7 @@ export const ManagerPage = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter(task => task.status_id === 3),
+                      ...body?.data.filter((task) => task.status_id === 3),
                     ];
 
                     newColumns[3].tasks = [
@@ -132,7 +132,7 @@ export const ManagerPage = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter(task => task.status_id === 4),
+                      ...body?.data.filter((task) => task.status_id === 4),
                     ];
 
                     newColumns[4].tasks = [
@@ -140,7 +140,7 @@ export const ManagerPage = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter(task => task.status_id === 2),
+                      ...body?.data.filter((task) => task.status_id === 2),
                     ];
 
                     return newColumns;
@@ -150,10 +150,10 @@ export const ManagerPage = () => {
           }
         });
       api()
-        .get('/task/all')
+        .get("/task/all")
         .then((body: AxiosResponse<TaskType[]>) => {
           if (body?.data) {
-            setColumns(prevColumns => {
+            setColumns((prevColumns) => {
               const newColumns = JSON.parse(JSON.stringify(prevColumns));
               newColumns[0].tasks = [
                 {

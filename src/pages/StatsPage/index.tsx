@@ -26,7 +26,7 @@ const series = [
 
 export const StatsPage = () => {
   return (
-    <MainWrapper>
+    <MainWrapper isManagerMode>
       <Box p="16px" gap="16px" display="flex" flexDirection="row">
         <CardWithChart title="Количество часов простоя по спринтам">
           <ChartContainer

@@ -146,7 +146,7 @@ export const ManagerPage = () => {
   }, []);
 
   return (
-    <MainWrapper>
+    <MainWrapper isManagerMode>
       <Box display="flex" flexDirection="column" p="12px">
         <Box display="flex" justifyContent="flex-end">
           <Button

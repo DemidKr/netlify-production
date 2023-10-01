@@ -4,12 +4,13 @@ import { Header } from "../Header";
 
 interface IProps {
   children: ReactNode;
+  isManagerMode?: boolean;
 }
 
-export const MainWrapper = ({ children }: IProps) => {
+export const MainWrapper = ({ children, isManagerMode }: IProps) => {
   return (
     <Box width="100%" height="100vh">
-      <Header />
+      <Header isManagerMode={isManagerMode} />
 
       <Box width="100%" height="max-content">
         <Box zIndex="1" position="sticky">

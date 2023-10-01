@@ -10,9 +10,15 @@ import Toolbar from "@mui/material/Toolbar";
 import api from "../../utils/axios";
 import { Icon } from "./icon";
 import { BackgroundLetterAvatars } from "../BackgroundLetterAvatars";
+import { useNavigate } from "react-router-dom";
 
-export const Header = () => {
+interface IProps {
+  isManagerMode?: boolean;
+}
+
+export const Header = ({ isManagerMode }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -34,6 +40,14 @@ export const Header = () => {
       });
   };
 
+  const handleGoStats = () => {
+    navigate("/stats");
+  };
+
+  const handleGoManagment = () => {
+    navigate(isManagerMode ? "/management" : "/tasks");
+  };
+
   return (
     <AppBar
       position="static"
@@ -46,9 +60,21 @@ export const Header = () => {
     >
       <Toolbar>
         <Icon />
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} pl="12px">
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, cursor: "pointer" }}
+          pl="12px"
+          onClick={handleGoManagment}
+        >
           Sprinter
         </Typography>
+
+        {isManagerMode && (
+          <MenuItem onClick={handleGoStats}>
+            <Typography textAlign="left">Статистика</Typography>
+          </MenuItem>
+        )}
 
         <Box>
           <IconButton

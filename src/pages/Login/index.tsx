@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { AxiosResponse } from "axios";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, useMediaQuery } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -9,6 +9,7 @@ import api from "../../utils/axios";
 import { IUser } from "../../entities/user";
 
 export const Login = () => {
+  const isDesktop = useMediaQuery("(min-width:600px)");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -82,7 +83,7 @@ export const Login = () => {
             setUsername(event.target.value)
           }
           sx={{
-            width: "390px",
+            width: isDesktop ? "390px" : "70%",
             "& label": {
               fontFamily: "Inter",
               fontWeight: "500",
@@ -102,7 +103,7 @@ export const Login = () => {
             setPassword(event.target.value)
           }
           sx={{
-            width: "390px",
+            width: isDesktop ? "390px" : "70%",
             "& label": {
               fontFamily: "Inter",
               fontWeight: "500",

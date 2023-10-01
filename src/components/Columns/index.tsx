@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import {
   closestCenter,
   DndContext,
@@ -28,6 +28,7 @@ export const Columns = ({
   setShowCreateTaskModal,
 }: ColumnsProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -100,11 +101,12 @@ export const Columns = ({
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
+        flexDirection: isDesktop ? "initial" : "row",
+        flexWrap: isDesktop ? "initial" : "wrap",
         gap: "20px",
         alignItems: "flex-start",
         padding: "40px",
+        overflowX: "auto",
       }}
     >
       <DndContext

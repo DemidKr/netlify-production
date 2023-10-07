@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { v4 as v4uuid } from "uuid";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
+import dayjs from "dayjs";
 
 import { Columns, MainWrapper } from "../../components";
+import { VISIBLE_DATE_FORMAT } from "../../constants";
 import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from "./modals";
 import { PRIORITY_ENUM, TaskType, ColumnType, ISprint } from "../../entities";
 import { CreateTaskModal } from "./modals/CreateTaskModal";
@@ -23,7 +25,7 @@ export const ManagerPage = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
     {
       id: "1",
-      name: "Backlog",
+      name: "Хранилище",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -34,7 +36,7 @@ export const ManagerPage = () => {
     },
     {
       id: "2",
-      name: "To Do",
+      name: "В работу",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -45,7 +47,7 @@ export const ManagerPage = () => {
     },
     {
       id: "3",
-      name: "In Progress",
+      name: "В работе",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -56,7 +58,7 @@ export const ManagerPage = () => {
     },
     {
       id: "4",
-      name: "QA",
+      name: "Тестирование",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -67,7 +69,7 @@ export const ManagerPage = () => {
     },
     {
       id: "5",
-      name: "Done",
+      name: "Готово",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -83,6 +85,7 @@ export const ManagerPage = () => {
   const [showStartSprintModal, setShowStartSprintModal] = useState(false);
   const [showUpdateTask, setShowUpdateTask] = useState(false);
   const [updateTaskItem, setUpdateTaskItem] = useState<TaskType | null>(null);
+  const [currentSprint, setCurrentSprint] = useState<ISprint | null>(null);
 
   const targetTasks = useMemo(
     () =>
@@ -102,6 +105,8 @@ export const ManagerPage = () => {
         .then((body: AxiosResponse<ISprint[]>) => {
           if (body?.data?.length > 0) {
             //получили текущий спринт
+            setCurrentSprint(body?.data?.[0]);
+
             api()
               .get(`/sprint/${body?.data?.[0]?.id}/tasks`)
               .then((body: AxiosResponse<TaskType[]>) => {
@@ -175,15 +180,41 @@ export const ManagerPage = () => {
   return (
     <MainWrapper isManagerMode>
       <Box display="flex" flexDirection="column" p="12px">
-        <Box display="flex" justifyContent="flex-end">
-          <Button
-            onClick={() => setShowStartSprintModal(true)}
-            variant="contained"
-            color="primary"
-            type="submit"
+        <Box
+          display="flex"
+          width="100%"
+          justifyContent="space-between"
+          alignItems="center"
+          px="40px"
+        >
+          <Typography
+            component="h3"
+            sx={{
+              color: "#0D062D",
+              fontFamily: "Inter",
+              fontSize: "18px",
+              fontStyle: "normal",
+              fontWeight: "600",
+              lineHeight: "normal",
+            }}
           >
-            Закончить спринт
-          </Button>
+            {currentSprint
+              ? `Спринт ${currentSprint?.id} - до ${dayjs(
+                  currentSprint?.deadline_at,
+                )?.format(VISIBLE_DATE_FORMAT)}`
+              : null}
+          </Typography>
+
+          <Box display="flex">
+            <Button
+              onClick={() => setShowStartSprintModal(true)}
+              variant="contained"
+              color="primary"
+              type="submit"
+            >
+              Закончить спринт
+            </Button>
+          </Box>
         </Box>
 
         <Columns

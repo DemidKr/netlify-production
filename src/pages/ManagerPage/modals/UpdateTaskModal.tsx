@@ -8,6 +8,7 @@ import api from "../../../utils/axios";
 import { CustomSelect, ModalWindow } from "../../../components";
 import { BASIC_DATE_FORMAT } from "../../../constants";
 import { PRIORITIES_TASK, PRIORITY_ENUM, TaskType } from "../../../entities";
+import { getPriorityById } from "../../../utils/helpers";
 
 const MOCK_EXECUTOR = [
   { name: "Иван Иванович", code: "123" },
@@ -29,7 +30,7 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
     task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"),
   );
   const [priority, setPriority] = useState(
-    task.priority_id ?? PRIORITY_ENUM.MEDIUM,
+    getPriorityById(task?.priority_id ?? 0),
   );
   const [executor, setExecutor] = useState(task.executor_id ?? "");
   const [estimate, setEstimate] = useState(task.estimate ?? 0);
@@ -56,7 +57,7 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
     setName(task.name ?? "");
     setDescription(task.description ?? "");
     setDeadline(task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"));
-    setPriority(task.priority_id ?? PRIORITY_ENUM.MEDIUM);
+    setPriority(getPriorityById(task?.priority_id ?? 1));
     setExecutor(task.executor_id ?? "");
     setEstimate(task.estimate ?? 0);
   }, [task]);

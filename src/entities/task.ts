@@ -16,7 +16,7 @@ export interface TaskType {
   executor: IUser;
   hidden?: boolean;
   deadline?: string;
-  priority_id?: string;
+  priority_id?: number;
   executor_id?: string;
   estimate?: string;
   team_id?: string;

@@ -6,6 +6,7 @@ import { Stack } from "@mui/material";
 
 import { BackgroundLetterAvatars } from "../../../../BackgroundLetterAvatars";
 import { TaskType } from "../../../../../entities";
+import { getPriorityById } from "../../../../../utils/helpers";
 
 interface IProps {
   task: TaskType;
@@ -31,7 +32,7 @@ export const Card = ({
           alignItems: "center",
         }}
       >
-        <Status status={task.status} />
+        <Status status={getPriorityById(task?.priority_id ?? 1)} />
         {showMenu && (
           <CardMenu
             deleteCard={deleteCard}

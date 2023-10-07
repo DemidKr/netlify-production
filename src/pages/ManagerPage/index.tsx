@@ -33,6 +33,7 @@ export const ManagerPage = () => {
         },
       ],
       color: "#1E293B",
+      showMenu: true,
     },
     {
       id: "2",
@@ -44,6 +45,7 @@ export const ManagerPage = () => {
         },
       ],
       color: "#5030E5",
+      showMenu: true,
     },
     {
       id: "3",
@@ -55,6 +57,7 @@ export const ManagerPage = () => {
         },
       ],
       color: "#FFA500",
+      showMenu: false,
     },
     {
       id: "4",
@@ -66,6 +69,7 @@ export const ManagerPage = () => {
         },
       ],
       color: "#33BFFF",
+      showMenu: false,
     },
     {
       id: "5",
@@ -77,6 +81,7 @@ export const ManagerPage = () => {
         },
       ],
       color: "#8BC48A",
+      showMenu: false,
     },
   ]);
 

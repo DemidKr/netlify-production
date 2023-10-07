@@ -10,4 +10,5 @@ export type ColumnType = {
   name: string;
   tasks: TaskType[];
   color: string;
+  showMenu: boolean;
 };

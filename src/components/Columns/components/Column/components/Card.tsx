@@ -12,6 +12,7 @@ interface IProps {
   deleteCard: () => void;
   setShowUpdateTaskModal?: () => void;
   setUpdateTaskItem?: (task: TaskType) => void;
+  showMenu?: boolean;
 }
 
 export const Card = ({
@@ -19,6 +20,7 @@ export const Card = ({
   deleteCard,
   setShowUpdateTaskModal,
   setUpdateTaskItem,
+  showMenu = false,
 }: IProps) => {
   return (
     <>
@@ -30,13 +32,15 @@ export const Card = ({
         }}
       >
         <Status status={task.status} />
-        <CardMenu
-          deleteCard={deleteCard}
-          onUpdateTask={() => {
-            setShowUpdateTaskModal?.();
-            setUpdateTaskItem?.(task);
-          }}
-        />
+        {showMenu && (
+          <CardMenu
+            deleteCard={deleteCard}
+            onUpdateTask={() => {
+              setShowUpdateTaskModal?.();
+              setUpdateTaskItem?.(task);
+            }}
+          />
+        )}
       </Box>
       <Typography
         component="h3"

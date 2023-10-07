@@ -141,6 +141,7 @@ export const Column = ({
                     deleteCard={() => deleteTaskHandler(index)}
                     setShowUpdateTaskModal={setShowUpdateTaskModal}
                     setUpdateTaskItem={setUpdateTaskItem}
+                    showMenu={currentColumn.showMenu}
                   />
                 </DraggableTaskWrapper>
               );

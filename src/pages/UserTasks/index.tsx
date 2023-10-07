@@ -22,7 +22,7 @@ export const UserTasks = () => {
   const [columns, setColumns] = useState<ColumnType[]>([
     {
       id: "1",
-      name: "Backlog",
+      name: "Хранилище",
       tasks: [
         {
           ...EMPTY_TASK,
@@ -30,10 +30,12 @@ export const UserTasks = () => {
         },
       ],
       color: "#1E293B",
+      showMenu: true,
     },
     {
       id: "2",
-      name: "To Do",
+      name: "В работу",
+      showMenu: true,
       tasks: [
         {
           name: "1234",
@@ -76,7 +78,8 @@ export const UserTasks = () => {
     },
     {
       id: "3",
-      name: "In Progress",
+      name: "В работе",
+      showMenu: false,
       tasks: [
         {
           name: "1234",
@@ -115,7 +118,8 @@ export const UserTasks = () => {
     },
     {
       id: "4",
-      name: "QA",
+      name: "Тестирование",
+      showMenu: false,
       tasks: [
         {
           name: "1234",
@@ -150,7 +154,8 @@ export const UserTasks = () => {
     },
     {
       id: "5",
-      name: "Done",
+      name: "Готово",
+      showMenu: false,
       tasks: [
         {
           name: "1234",

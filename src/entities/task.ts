@@ -3,7 +3,7 @@ import { IUser } from "./user";
 export enum PRIORITY_ENUM {
   HOT = "hot",
   HIGH = "high",
-  MEDIUM = "medium",
+  MEDIUM = "middle",
   LOW = "low",
 }
 

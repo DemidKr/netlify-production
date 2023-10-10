@@ -93,7 +93,7 @@ export const Column = ({
               {currentColumn.tasks.length - 1}
             </Box>
           </Box>
-          {currentColumn.name === "Backlog" && setShowCreateTaskModal && (
+          {currentColumn.name === "Хранилище" && setShowCreateTaskModal && (
             <AddButton setShowAddTaskButton={setShowCreateTaskModal} />
           )}
         </Box>

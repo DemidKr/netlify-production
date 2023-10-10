@@ -76,7 +76,7 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
     setPriority(getPriorityById(task?.priority_id ?? 1));
     setExecutor(task.executor_id ?? "");
     setEstimate(task.estimate ?? 0);
-  }, [task]);
+  }, [task, show]);
 
   return (
     <ModalWindow

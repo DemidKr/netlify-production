@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { Columns, MainWrapper } from "../../components";
 import { VISIBLE_DATE_FORMAT } from "../../constants";
 import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from "./modals";
-import { PRIORITY_ENUM, TaskType, ColumnType, ISprint } from "../../entities";
+import { ColumnType, ISprint, PRIORITY_ENUM, TaskType } from "../../entities";
 import { CreateTaskModal } from "./modals/CreateTaskModal";
 import api from "../../utils/axios";
 
@@ -226,7 +226,7 @@ export const ManagerPage = () => {
           columns={columns}
           setColumns={setColumns}
           setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
-          setShowUpdateTaskModal={() => setShowCreateTaskModal(true)}
+          setShowUpdateTaskModal={() => setShowUpdateTask(true)}
           setUpdateTaskItem={setUpdateTaskItem}
         />
       </Box>

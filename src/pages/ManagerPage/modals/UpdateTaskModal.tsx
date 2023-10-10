@@ -4,18 +4,18 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import api from "../../../utils/axios";
 import { CustomSelect, ModalWindow } from "../../../components";
 import { BASIC_DATE_FORMAT } from "../../../constants";
-import { PRIORITIES_TASK, PRIORITY_ENUM, TaskType } from "../../../entities";
+import {
+  ISelectItem,
+  PRIORITIES_TASK,
+  PRIORITY_ENUM,
+  TaskType,
+} from "../../../entities";
 import { getPriorityById } from "../../../utils/helpers";
-
-const MOCK_EXECUTOR = [
-  { name: "Иван Иванович", code: "123" },
-  { name: "Петр Петрович", code: "51234" },
-  { name: "Никита Сергеевич", code: "9123333" },
-  { name: "Алексей Михайлович", code: "5444" },
-];
+import { AxiosResponse } from "axios/index";
+import { IUser } from "../../../entities/user";
+import api from "../../../utils/axios";
 
 interface IProps {
   show: boolean;
@@ -32,6 +32,7 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
   const [priority, setPriority] = useState(
     getPriorityById(task?.priority_id ?? 0),
   );
+  const [executors, setExecutors] = useState<ISelectItem[]>([]);
   const [executor, setExecutor] = useState(task.executor_id ?? "");
   const [estimate, setEstimate] = useState(task.estimate ?? 0);
 
@@ -54,6 +55,21 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
   };
 
   useEffect(() => {
+    if (show) {
+      // получаем участников команды
+      api()
+        .get("/team/developers")
+        .then((body: AxiosResponse<IUser[]>) => {
+          if (body?.data) {
+            setExecutors(
+              body.data.map((executor) => ({
+                code: executor.id,
+                name: executor.first_name ?? "",
+              })),
+            );
+          }
+        });
+    }
     setName(task.name ?? "");
     setDescription(task.description ?? "");
     setDeadline(task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"));
@@ -62,14 +78,12 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
     setEstimate(task.estimate ?? 0);
   }, [task]);
 
-  console.log("name", name, "descrip", description);
-
   return (
     <ModalWindow
       withCancelButton
       open={show}
       onClose={onClose}
-      title="Создание задачи"
+      title="Редактирование задачи"
       maxWidth="sm"
       onSubmit={handleSubmit}
       disabledSubmitButton={name.length === 0 || !priority || !executor}
@@ -129,7 +143,7 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
           labelId="executor-label"
           label="Исполнитель"
           onSelect={setExecutor}
-          items={MOCK_EXECUTOR}
+          items={executors}
         />
 
         <TextField

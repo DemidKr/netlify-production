@@ -1,7 +1,6 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -60,10 +59,8 @@ root.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <React.StrictMode>
-          <App />
-          <CssBaseline />
-        </React.StrictMode>
+        <App />
+        <CssBaseline />
       </LocalizationProvider>
     </ThemeProvider>
   </BrowserRouter>,

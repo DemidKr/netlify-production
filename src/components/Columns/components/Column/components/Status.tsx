@@ -47,7 +47,6 @@ export const Status: FC<IProps> = ({ status }) => {
         fontStyle: "normal",
         fontWeight: "500",
         lineHeight: "normal",
-        textTransform: "capitalize",
       }}
     >
       {PRIORITIES_TASK.find((x) => x.code === status)?.name}

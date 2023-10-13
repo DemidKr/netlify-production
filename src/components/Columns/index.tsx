@@ -75,6 +75,13 @@ export const Columns = ({
       const activeTask = columns[activeColumnIndex]?.tasks?.find(
         (task) => task.id === active.id,
       );
+      console.log("active", copyColumnsArray[activeColumnIndex].name);
+      console.log("new", copyColumnsArray[newColumnIndex].name);
+
+      if (copyColumnsArray[newColumnIndex].name === "Хранилище") return;
+
+      if (copyColumnsArray[activeColumnIndex].name === "Готово") return;
+
       if (activeTask) {
         if (activeTask.hidden) {
           copyColumnsArray[newColumnIndex].tasks.push(activeTask);

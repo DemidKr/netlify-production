@@ -229,6 +229,7 @@ export const ManagerPage = () => {
         <Columns
           columns={columns}
           setColumns={setColumns}
+          currentSprint={currentSprint?.id ?? "1"}
           setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
           setShowUpdateTaskModal={() => setShowUpdateTask(true)}
           setUpdateTaskItem={setUpdateTaskItem}

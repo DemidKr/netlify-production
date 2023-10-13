@@ -19,6 +19,7 @@ import api from "../../utils/axios";
 
 type ColumnsProps = {
   columns: ColumnType[];
+  currentSprint?: string;
   setColumns: (columns: ColumnType[]) => void;
   setShowCreateTaskModal?: () => void;
   setShowUpdateTaskModal?: () => void;
@@ -27,6 +28,7 @@ type ColumnsProps = {
 
 export const Columns = ({
   columns,
+  currentSprint,
   setColumns,
   setShowCreateTaskModal,
   setShowUpdateTaskModal,
@@ -90,6 +92,8 @@ export const Columns = ({
           copyColumnsArray[activeColumnIndex].tasks = copyColumnsArray[
             activeColumnIndex
           ].tasks.filter((task: TaskType) => task.id !== activeTask.id);
+          // меняем спринт
+          activeTask.sprint_id = currentSprint;
           // вставляем в новый столбец
           copyColumnsArray[newColumnIndex].tasks.push(activeTask);
 
@@ -109,6 +113,7 @@ export const Columns = ({
           // eslint-disable-next-line
           api().put(`/task/${activeTask.id}`, {
             status_id: newColumnIndex + 1,
+            sprint_id: currentSprint,
           });
         }
       }

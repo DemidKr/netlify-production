@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { v4 as v4uuid } from "uuid";
 import { Box, Button, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
@@ -102,6 +102,10 @@ export const ManagerPage = () => {
         : [],
     [columns],
   );
+
+  const handleCloseUpdateTaskModal = useCallback(() => {
+    setShowUpdateTask(false);
+  }, []);
 
   useEffect(() => {
     if (!requested.current) {
@@ -251,7 +255,7 @@ export const ManagerPage = () => {
       {updateTaskItem && (
         <UpdateTaskModal
           show={showUpdateTask}
-          onClose={() => setShowUpdateTask(false)}
+          onClose={handleCloseUpdateTaskModal}
           task={updateTaskItem}
         />
       )}

@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 
 import { ColumnType, TaskType } from "../../../../entities";
+import api from "../../../../utils/axios";
 import { DraggableColumnWrapper } from "./components/DraggableColumnWrapper";
 import { DraggableTaskWrapper } from "./components/DraggableTaskWrapper";
 import { Card } from "./components/Card";
@@ -28,13 +29,17 @@ export const Column = ({
   setShowUpdateTaskModal,
   setUpdateTaskItem,
 }: IProps) => {
-  const deleteTaskHandler = (deleteIndex: number) => {
-    const deletedTaskArray = currentColumn.tasks.filter(
-      (_column, index) => index !== deleteIndex,
-    );
-    const copyColumnsArray = JSON.parse(JSON.stringify(columns));
-    copyColumnsArray[currentColumnIndex].tasks = deletedTaskArray;
-    setColumns(copyColumnsArray);
+  const deleteTaskHandler = (taskId: string, deleteIndex: number) => {
+    api()
+      .delete(`/task/${taskId}`)
+      .then(() => {
+        const deletedTaskArray = currentColumn.tasks.filter(
+          (_column, index) => index !== deleteIndex,
+        );
+        const copyColumnsArray = JSON.parse(JSON.stringify(columns));
+        copyColumnsArray[currentColumnIndex].tasks = deletedTaskArray;
+        setColumns(copyColumnsArray);
+      });
   };
 
   return (
@@ -138,7 +143,7 @@ export const Column = ({
                 <DraggableTaskWrapper key={task.id} id={task.id}>
                   <Card
                     task={task}
-                    deleteCard={() => deleteTaskHandler(index)}
+                    deleteCard={() => deleteTaskHandler(task.id, index)}
                     setShowUpdateTaskModal={setShowUpdateTaskModal}
                     setUpdateTaskItem={setUpdateTaskItem}
                     showMenu={currentColumn.showMenu}

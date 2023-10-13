@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -12,7 +12,7 @@ import {
   PRIORITY_ENUM,
   TaskType,
 } from "../../../entities";
-import { getPriorityById } from "../../../utils/helpers";
+import { getPriorityById, getPriorityIdByName } from "../../../utils/helpers";
 import { AxiosResponse } from "axios/index";
 import { IUser } from "../../../entities/user";
 import api from "../../../utils/axios";
@@ -23,7 +23,7 @@ interface IProps {
   task: TaskType;
 }
 
-export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
+export const UpdateTaskModal = memo(({ show, onClose, task }: IProps) => {
   const [name, setName] = useState(task.name ?? "");
   const [description, setDescription] = useState(task.description ?? "");
   const [deadline, setDeadline] = useState<Dayjs | null>(
@@ -47,15 +47,17 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
         executor_id: executor,
         estimate,
         days_until_deadline: daysUntilDeadline,
-        priority_id: +priority,
+        priority_id: getPriorityIdByName(priority),
       })
       .then(() => {
         onClose();
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       });
   };
 
   useEffect(() => {
-    if (show) {
+    if (show && executors?.length === 0) {
       // получаем участников команды
       api()
         .get("/team/developers")
@@ -69,14 +71,18 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
             );
           }
         });
+
+      setName(task.name ?? "");
+      setDescription(task.description ?? "");
+      setDeadline(
+        task.deadline_at ? dayjs(task.deadline_at) : dayjs().add(14, "day"),
+      );
+      setPriority(getPriorityById(task?.priority_id ?? 1));
+      setExecutor(task.executor_id ?? "");
+      setEstimate(task.estimate ?? 0);
     }
-    setName(task.name ?? "");
-    setDescription(task.description ?? "");
-    setDeadline(task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"));
-    setPriority(getPriorityById(task?.priority_id ?? 1));
-    setExecutor(task.executor_id ?? "");
-    setEstimate(task.estimate ?? 0);
-  }, [task, show]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [show]);
 
   return (
     <ModalWindow
@@ -157,4 +163,4 @@ export const UpdateTaskModal = ({ show, onClose, task }: IProps) => {
       </Box>
     </ModalWindow>
   );
-};
+});

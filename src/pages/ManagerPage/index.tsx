@@ -208,7 +208,7 @@ export const ManagerPage = () => {
             }}
           >
             {currentSprint
-              ? `Спринт ${currentSprint?.id} - до ${dayjs(
+              ? `Спринт ${currentSprint?.id}(${currentSprint?.name}) - до ${dayjs(
                   currentSprint?.deadline_at,
                 )?.format(VISIBLE_DATE_FORMAT)}`
               : null}

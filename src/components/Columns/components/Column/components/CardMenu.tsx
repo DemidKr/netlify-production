@@ -13,16 +13,19 @@ export const CardMenu = ({ deleteCard, onUpdateTask }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const deleteTaskHandler = () => {
+  const deleteTaskHandler = (event: React.MouseEvent<HTMLLIElement>) => {
+    event.stopPropagation();
     deleteCard();
     setAnchorEl(null);
   };
-  const handleUpdateTask = () => {
+  const handleUpdateTask = (event: React.MouseEvent<HTMLLIElement>) => {
+    event.stopPropagation();
     onUpdateTask();
     setAnchorEl(null);
   };

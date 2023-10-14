@@ -24,6 +24,7 @@ type ColumnsProps = {
   setShowCreateTaskModal?: () => void;
   setShowUpdateTaskModal?: () => void;
   setUpdateTaskItem?: (task: TaskType) => void;
+  setShowMoreInfoModal?: (task: TaskType) => void;
 };
 
 export const Columns = ({
@@ -33,6 +34,7 @@ export const Columns = ({
   setShowCreateTaskModal,
   setShowUpdateTaskModal,
   setUpdateTaskItem,
+  setShowMoreInfoModal,
 }: ColumnsProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const isDesktop = useMediaQuery("(min-width:600px)");
@@ -150,6 +152,7 @@ export const Columns = ({
             setShowCreateTaskModal={setShowCreateTaskModal}
             setShowUpdateTaskModal={setShowUpdateTaskModal}
             setUpdateTaskItem={setUpdateTaskItem}
+            setShowMoreInfoModal={setShowMoreInfoModal}
           />
         ))}
         <DragOverlay>

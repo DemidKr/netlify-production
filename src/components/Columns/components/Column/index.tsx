@@ -18,6 +18,7 @@ type IProps = {
   setShowCreateTaskModal?: () => void;
   setShowUpdateTaskModal?: () => void;
   setUpdateTaskItem?: (task: TaskType) => void;
+  setShowMoreInfoModal?: (task: TaskType) => void;
 };
 
 export const Column = ({
@@ -28,6 +29,7 @@ export const Column = ({
   setShowCreateTaskModal,
   setShowUpdateTaskModal,
   setUpdateTaskItem,
+  setShowMoreInfoModal,
 }: IProps) => {
   const deleteTaskHandler = (taskId: string, deleteIndex: number) => {
     api()
@@ -147,6 +149,7 @@ export const Column = ({
                     setShowUpdateTaskModal={setShowUpdateTaskModal}
                     setUpdateTaskItem={setUpdateTaskItem}
                     showMenu={currentColumn.showMenu}
+                    setShowMoreInfoModal={setShowMoreInfoModal}
                   />
                 </DraggableTaskWrapper>
               );

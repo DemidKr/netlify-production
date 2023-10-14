@@ -14,6 +14,7 @@ interface IProps {
   setShowUpdateTaskModal?: () => void;
   setUpdateTaskItem?: (task: TaskType) => void;
   showMenu?: boolean;
+  setShowMoreInfoModal?: (task: TaskType) => void;
 }
 
 export const Card = ({
@@ -22,9 +23,15 @@ export const Card = ({
   setShowUpdateTaskModal,
   setUpdateTaskItem,
   showMenu = false,
+  setShowMoreInfoModal,
 }: IProps) => {
   return (
-    <>
+    <Box
+      onClick={() => {
+        setShowMoreInfoModal?.(task);
+      }}
+      sx={{ cursor: "pointer" }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -90,6 +97,6 @@ export const Card = ({
           />
         </Stack>
       </Box>
-    </>
+    </Box>
   );
 };

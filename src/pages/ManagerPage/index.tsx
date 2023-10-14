@@ -4,7 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
 import dayjs from "dayjs";
 
-import { Columns, MainWrapper } from "../../components";
+import { Columns, MainWrapper, MoreInfoModal } from "../../components";
 import { VISIBLE_DATE_FORMAT } from "../../constants";
 import { DeleteTaskModal, StartSprintModal, UpdateTaskModal } from "./modals";
 import { ColumnType, ISprint, PRIORITY_ENUM, TaskType } from "../../entities";
@@ -91,6 +91,9 @@ export const ManagerPage = () => {
   const [showUpdateTask, setShowUpdateTask] = useState(false);
   const [updateTaskItem, setUpdateTaskItem] = useState<TaskType | null>(null);
   const [currentSprint, setCurrentSprint] = useState<ISprint | null>(null);
+  const [showMoreInfoModal, setShowMoreInfoModal] = useState<TaskType | null>(
+    null,
+  );
 
   const targetTasks = useMemo(
     () =>
@@ -233,6 +236,7 @@ export const ManagerPage = () => {
           setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
           setShowUpdateTaskModal={() => setShowUpdateTask(true)}
           setUpdateTaskItem={setUpdateTaskItem}
+          setShowMoreInfoModal={setShowMoreInfoModal}
         />
       </Box>
 
@@ -260,6 +264,12 @@ export const ManagerPage = () => {
           task={updateTaskItem}
         />
       )}
+
+      <MoreInfoModal
+        show={!!showMoreInfoModal}
+        onClose={() => setShowMoreInfoModal(null)}
+        task={showMoreInfoModal}
+      />
     </MainWrapper>
   );
 };

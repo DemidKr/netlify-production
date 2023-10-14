@@ -1,12 +1,14 @@
+import dayjs from "dayjs";
 import { useEffect, useState, useRef } from "react";
+import { AxiosResponse } from "axios";
 import { v4 as v4uuid } from "uuid";
+import { Box, Typography } from "@mui/material";
 
 import { Columns } from "../../components/Columns";
-import { Box } from "@mui/material";
 import { PRIORITY_ENUM, ColumnType, TaskType, ISprint } from "../../entities";
-import { MainWrapper } from "../../components";
+import { MainWrapper, MoreInfoModal } from "../../components";
 import api from "../../utils/axios";
-import { AxiosResponse } from "axios";
+import { VISIBLE_DATE_FORMAT } from "../../constants";
 
 const EMPTY_TASK = {
   name: "",
@@ -19,6 +21,10 @@ const EMPTY_TASK = {
 
 export const UserTasks = () => {
   const requested = useRef(false);
+  const [showMoreInfoModal, setShowMoreInfoModal] = useState<TaskType | null>(
+    null,
+  );
+  const [currentSprint, setCurrentSprint] = useState<ISprint | null>(null);
   const [columns, setColumns] = useState<ColumnType[]>([
     {
       id: "1",
@@ -89,6 +95,8 @@ export const UserTasks = () => {
         .then((body: AxiosResponse<ISprint[]>) => {
           if (body?.data?.length > 0) {
             //получили текущий спринт
+            setCurrentSprint(body?.data?.[0]);
+
             api()
               .get(`/sprint/${body?.data?.[0]?.id}/tasks`)
               .then((body: AxiosResponse<TaskType[]>) => {
@@ -103,7 +111,9 @@ export const UserTasks = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter((task) => task.status_id === 2),
+                      ...body?.data.filter(
+                        (task) => task.status_id === 1 || task.status_id === 2,
+                      ),
                     ];
 
                     newColumns[2].tasks = [
@@ -162,8 +172,44 @@ export const UserTasks = () => {
   return (
     <MainWrapper>
       <Box mt="28px">
-        <Columns columns={columns} setColumns={setColumns} />
+        <Box
+          display="flex"
+          width="100%"
+          justifyContent="space-between"
+          alignItems="center"
+          px="40px"
+        >
+          <Typography
+            component="h3"
+            sx={{
+              color: "#0D062D",
+              fontFamily: "Inter",
+              fontSize: "18px",
+              fontStyle: "normal",
+              fontWeight: "600",
+              lineHeight: "normal",
+            }}
+          >
+            {currentSprint
+              ? `Спринт ${currentSprint?.id}(${currentSprint?.name}) - до ${dayjs(
+                  currentSprint?.deadline_at,
+                )?.format(VISIBLE_DATE_FORMAT)}`
+              : null}
+          </Typography>
+        </Box>
+
+        <Columns
+          columns={columns}
+          setColumns={setColumns}
+          setShowMoreInfoModal={setShowMoreInfoModal}
+        />
       </Box>
+
+      <MoreInfoModal
+        show={!!showMoreInfoModal}
+        onClose={() => setShowMoreInfoModal(null)}
+        task={showMoreInfoModal}
+      />
     </MainWrapper>
   );
 };

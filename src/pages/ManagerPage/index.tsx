@@ -133,7 +133,9 @@ export const ManagerPage = () => {
                         ...EMPTY_TASK,
                         id: v4uuid(),
                       },
-                      ...body?.data.filter((task) => task.status_id === 2),
+                      ...body?.data.filter(
+                        (task) => task.status_id === 1 || task.status_id === 2,
+                      ),
                     ];
 
                     newColumns[2].tasks = [

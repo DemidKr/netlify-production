@@ -58,7 +58,7 @@ export const CreateTaskModal = ({ show, onClose }: IProps) => {
             setExecutors(
               body.data.map((executor) => ({
                 code: executor.id,
-                name: executor.first_name ?? "",
+                name: executor.second_name ?? "",
               })),
             );
           }

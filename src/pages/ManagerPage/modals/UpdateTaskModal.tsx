@@ -66,7 +66,7 @@ export const UpdateTaskModal = memo(({ show, onClose, task }: IProps) => {
             setExecutors(
               body.data.map((executor) => ({
                 code: executor.id,
-                name: executor.first_name ?? "",
+                name: executor.second_name ?? "",
               })),
             );
           }

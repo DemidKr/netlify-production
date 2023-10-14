@@ -102,6 +102,11 @@ export const Login = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(event.target.value)
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleLogin();
+            }
+          }}
           sx={{
             width: isDesktop ? "390px" : "70%",
             "& label": {

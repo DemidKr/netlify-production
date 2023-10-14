@@ -39,9 +39,16 @@ export const MoreInfoModal = ({ show, onClose, task }: IProps) => {
         </Box>
 
         <Typography variant="h3">
-          Исполнитель - {task.author.second_name} {task.author.first_name}{" "}
+          Исполнитель - {task.executor.second_name} {task.executor.first_name}{" "}
+          {task.executor.middle_name}
+        </Typography>
+
+        <Typography variant="h3">
+          Автор - {task.author.second_name} {task.author.first_name}{" "}
           {task.author.middle_name}
         </Typography>
+
+        <Typography variant="h3">Оценка в часах - {task.estimate}</Typography>
 
         <Typography variant="h5">{task.description}</Typography>
       </Box>

@@ -74,6 +74,9 @@ export const Card = ({
           fontWeight: "400",
           lineHeight: "normal",
           mt: "8px",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
         }}
       >
         {task.description}

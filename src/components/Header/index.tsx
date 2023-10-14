@@ -100,7 +100,7 @@ export const Header = ({ isManagerMode }: IProps) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout}>Выход</MenuItem>
           </Menu>
         </Box>
       </Toolbar>

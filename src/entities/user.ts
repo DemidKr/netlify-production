@@ -7,3 +7,9 @@ export interface IUser {
   email?: string;
   works_hours_in_day?: number; //TODO сделать обязательным
 }
+
+export enum ROLE_ENUM {
+  USER = "Пользователь",
+  TESTER = "Тестировщик",
+  MANAGER = "Менеджер",
+}

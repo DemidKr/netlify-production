@@ -73,6 +73,18 @@ export const ManagerPage = () => {
     },
     {
       id: "5",
+      name: "Тестируется",
+      tasks: [
+        {
+          ...EMPTY_TASK,
+          id: v4uuid(),
+        },
+      ],
+      color: "#1AAAAA",
+      showMenu: false,
+    },
+    {
+      id: "6",
       name: "Готово",
       tasks: [
         {
@@ -124,7 +136,7 @@ export const ManagerPage = () => {
               .then((body: AxiosResponse<TaskType[]>) => {
                 if (body?.data) {
                   //получили задачи текущего спринта
-                  //сетим для туду столбца все новые задачи
+                  //сетим все новые задачи начиная с туду столбца
                   setColumns((prevColumns) => {
                     const newColumns = JSON.parse(JSON.stringify(prevColumns));
 
@@ -162,6 +174,14 @@ export const ManagerPage = () => {
                       ...body?.data.filter((task) => task.status_id === 5),
                     ];
 
+                    newColumns[5].tasks = [
+                      {
+                        ...EMPTY_TASK,
+                        id: v4uuid(),
+                      },
+                      ...body?.data.filter((task) => task.status_id === 6),
+                    ];
+
                     return newColumns;
                   });
                 }
@@ -193,7 +213,7 @@ export const ManagerPage = () => {
 
   return (
     <MainWrapper isManagerMode>
-      <Box display="flex" flexDirection="column" p="12px">
+      <Box display="flex" flexDirection="column" p="12px" pb="8px">
         <Box
           display="flex"
           width="100%"

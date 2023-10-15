@@ -77,7 +77,6 @@ export const Login = () => {
 
         <TextField
           label="Логин"
-          inputProps={{ autoComplete: "off" }}
           value={username}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             setUsername(event.target.value)
@@ -96,7 +95,6 @@ export const Login = () => {
         />
         <TextField
           label="Пароль"
-          inputProps={{ autoComplete: "off" }}
           value={password}
           type="password"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

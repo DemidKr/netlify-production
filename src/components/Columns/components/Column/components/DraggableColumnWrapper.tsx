@@ -9,7 +9,8 @@ export const DraggableColumnWrapper = ({ children }: IProps) => {
   return (
     <Box
       sx={{
-        width: "354px",
+        minWidth: "222px",
+        width: "calc((100vw - 24px - 80px) / 6)",
         height: "fit-content",
         minHeight: "500px",
         borderRadius: "16px",

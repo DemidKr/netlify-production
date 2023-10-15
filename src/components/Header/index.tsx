@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,9 +9,9 @@ import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 
 import api from "../../utils/axios";
+import { getUserRoleNameById } from "../../utils/helpers";
 import { Icon } from "./icon";
 import { BackgroundLetterAvatars } from "../BackgroundLetterAvatars";
-import { useNavigate } from "react-router-dom";
 
 interface IProps {
   isManagerMode?: boolean;
@@ -18,6 +19,7 @@ interface IProps {
 
 export const Header = ({ isManagerMode }: IProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "{}");
   const navigate = useNavigate();
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -59,22 +61,45 @@ export const Header = ({ isManagerMode }: IProps) => {
       }}
     >
       <Toolbar>
-        <Icon />
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1, cursor: "pointer" }}
-          pl="12px"
-          onClick={handleGoManagment}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            textAlign: "center",
+          }}
         >
-          Sprinter
-        </Typography>
+          <Icon />
+          <Typography
+            variant="h6"
+            px="12px"
+            onClick={handleGoManagment}
+            sx={{
+              cursor: "pointer",
+            }}
+          >
+            Sprinter
+          </Typography>
+          <Typography
+            variant="h6"
+            textTransform="lowercase"
+            sx={{ display: { xs: "none", md: "block" } }}
+          >
+            Я {getUserRoleNameById(currentUser?.role_id)}
+          </Typography>
+        </Box>
 
-        {isManagerMode && (
-          <MenuItem onClick={handleGoStats}>
-            <Typography textAlign="left">Статистика</Typography>
-          </MenuItem>
-        )}
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            justifyContent: "flex-end",
+            mr: "24px",
+          }}
+        >
+          {isManagerMode && (
+            <Typography onClick={handleGoStats}>Статистика</Typography>
+          )}
+        </Box>
 
         <Box>
           <IconButton
@@ -83,8 +108,12 @@ export const Header = ({ isManagerMode }: IProps) => {
             color="inherit"
             sx={{ padding: 0 }}
           >
-            <BackgroundLetterAvatars firstName="Тест" secondName="Иван" />
+            <BackgroundLetterAvatars
+              firstName={currentUser?.first_name}
+              secondName={currentUser?.second_name}
+            />
           </IconButton>
+
           <Menu
             id="menu-appbar"
             anchorEl={anchorEl}

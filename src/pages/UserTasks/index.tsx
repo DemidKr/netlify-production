@@ -76,6 +76,18 @@ export const UserTasks = () => {
     },
     {
       id: "5",
+      name: "Тестируется",
+      tasks: [
+        {
+          ...EMPTY_TASK,
+          id: v4uuid(),
+        },
+      ],
+      color: "#1AAAAA",
+      showMenu: false,
+    },
+    {
+      id: "6",
       name: "Готово",
       tasks: [
         {
@@ -138,6 +150,14 @@ export const UserTasks = () => {
                         id: v4uuid(),
                       },
                       ...body?.data.filter((task) => task.status_id === 5),
+                    ];
+
+                    newColumns[5].tasks = [
+                      {
+                        ...EMPTY_TASK,
+                        id: v4uuid(),
+                      },
+                      ...body?.data.filter((task) => task.status_id === 6),
                     ];
 
                     return newColumns;

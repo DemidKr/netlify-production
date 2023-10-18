@@ -13,3 +13,9 @@ export enum ROLE_ENUM {
   TESTER = "Тестировщик",
   MANAGER = "Менеджер",
 }
+
+export enum ROLE_ID_ENUM {
+  USER = 1,
+  TESTER = 2,
+  MANAGER = 3,
+}

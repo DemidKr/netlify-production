@@ -114,7 +114,7 @@ export const UserTasks = () => {
               .then((body: AxiosResponse<TaskType[]>) => {
                 if (body?.data) {
                   //получили задачи текущего спринта
-                  //сетим для туду столбца все новые задачи
+                  //сетим все новые задачи начиная с туду столбца
                   setColumns((prevColumns) => {
                     const newColumns = JSON.parse(JSON.stringify(prevColumns));
 

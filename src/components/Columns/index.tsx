@@ -13,9 +13,10 @@ import { useState } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 
 import { ColumnType, TaskType } from "../../entities";
+import api from "../../utils/axios";
+import { ROLE_ID_ENUM } from "../../entities/user";
 import { Card } from "./components/Column/components/Card";
 import { Column } from "./components/Column";
-import api from "../../utils/axios";
 
 type ColumnsProps = {
   columns: ColumnType[];
@@ -38,6 +39,7 @@ export const Columns = ({
 }: ColumnsProps) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const isDesktop = useMediaQuery("(min-width:600px)");
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "{}");
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -64,7 +66,6 @@ export const Columns = ({
   const handleDragEnd = (event: DragEndEvent) => {
     setActiveId(null);
     const { active, over } = event;
-    console.log("active, over", active, over);
 
     if (over && active.id !== over.id) {
       const activeColumnIndex = columns.findIndex((column) =>
@@ -79,12 +80,34 @@ export const Columns = ({
       const activeTask = columns[activeColumnIndex]?.tasks?.find(
         (task) => task.id === active.id,
       );
-      console.log("active", copyColumnsArray[activeColumnIndex].name);
-      console.log("new", copyColumnsArray[newColumnIndex].name);
 
-      if (copyColumnsArray[newColumnIndex].name === "Хранилище") return;
+      // нельзя перенести обратно задачу в бэклог
+      if (copyColumnsArray[newColumnIndex].id === 1) {
+        return;
+      }
 
-      if (copyColumnsArray[activeColumnIndex].name === "Готово") return;
+      // если текущая колонка готово, то уже никуда нельзя перенести
+      if (copyColumnsArray[activeColumnIndex].id === 6) {
+        return;
+      }
+
+      // пользователь может переносить во все колонки кроме "готово" и "тестируется"
+      if (
+        currentUser.role_id === ROLE_ID_ENUM.USER &&
+        (copyColumnsArray[newColumnIndex].id === 6 ||
+          copyColumnsArray[newColumnIndex].id === 5)
+      ) {
+        return;
+      }
+
+      // тестировщик может перенести в "готово" или "в работу" для исправлениz
+      if (
+        currentUser.role_id === ROLE_ID_ENUM.TESTER &&
+        (copyColumnsArray[newColumnIndex].id === 1 ||
+          copyColumnsArray[newColumnIndex].id === 3)
+      ) {
+        return;
+      }
 
       if (activeTask) {
         if (activeTask.hidden) {

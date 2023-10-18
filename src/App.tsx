@@ -1,12 +1,15 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { UserTasks, Login, ManagerPage, StatsPage } from "./pages";
+import { ROLE_ID_ENUM } from "./entities/user";
 
 export const App = () => {
   const hasAccessToken = localStorage.getItem("access_token") ?? false;
-  // 2 разработчик, 3 - менеджер
-  const isManager = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user") ?? "{}")?.role_id === 3
+  const currentUser = JSON.parse(localStorage.getItem("user") ?? "{}");
+
+  const isManager = !!currentUser
+    ? currentUser?.role_id === ROLE_ID_ENUM.MANAGER ||
+      currentUser?.role_id === ROLE_ID_ENUM.TESTER
     : false;
 
   return (

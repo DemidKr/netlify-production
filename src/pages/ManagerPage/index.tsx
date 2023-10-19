@@ -24,7 +24,7 @@ export const ManagerPage = () => {
   const requested = useRef(false);
   const [columns, setColumns] = useState<ColumnType[]>([
     {
-      id: "1",
+      id: 1,
       name: "Хранилище",
       tasks: [
         {
@@ -36,7 +36,7 @@ export const ManagerPage = () => {
       showMenu: true,
     },
     {
-      id: "2",
+      id: 2,
       name: "В работу",
       tasks: [
         {
@@ -48,7 +48,7 @@ export const ManagerPage = () => {
       showMenu: true,
     },
     {
-      id: "3",
+      id: 3,
       name: "В работе",
       tasks: [
         {
@@ -60,7 +60,7 @@ export const ManagerPage = () => {
       showMenu: false,
     },
     {
-      id: "4",
+      id: 4,
       name: "Тестирование",
       tasks: [
         {
@@ -72,7 +72,7 @@ export const ManagerPage = () => {
       showMenu: false,
     },
     {
-      id: "5",
+      id: 5,
       name: "Тестируется",
       tasks: [
         {
@@ -84,7 +84,7 @@ export const ManagerPage = () => {
       showMenu: false,
     },
     {
-      id: "6",
+      id: 6,
       name: "Готово",
       tasks: [
         {

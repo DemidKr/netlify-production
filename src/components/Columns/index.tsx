@@ -100,7 +100,7 @@ export const Columns = ({
         return;
       }
 
-      // тестировщик может перенести в "готово" или "в работу" для исправлениz
+      // тестировщик может перенести в "готово" или "в работу" для исправления
       if (
         currentUser.role_id === ROLE_ID_ENUM.TESTER &&
         (copyColumnsArray[newColumnIndex].id === 1 ||

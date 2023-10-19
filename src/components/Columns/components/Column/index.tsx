@@ -118,6 +118,8 @@ export const Column = ({
         sx={{
           display: "flex",
           flexDirection: "column",
+          overflowY: "auto",
+          height: "400px",
         }}
       >
         {currentColumn.tasks.length > 0 && (

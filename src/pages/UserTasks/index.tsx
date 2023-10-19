@@ -27,7 +27,7 @@ export const UserTasks = () => {
   const [currentSprint, setCurrentSprint] = useState<ISprint | null>(null);
   const [columns, setColumns] = useState<ColumnType[]>([
     {
-      id: "1",
+      id: 1,
       name: "Хранилище",
       tasks: [
         {
@@ -39,7 +39,7 @@ export const UserTasks = () => {
       showMenu: false,
     },
     {
-      id: "2",
+      id: 2,
       name: "В работу",
       tasks: [
         {
@@ -51,7 +51,7 @@ export const UserTasks = () => {
       showMenu: false,
     },
     {
-      id: "3",
+      id: 3,
       name: "В работе",
       tasks: [
         {
@@ -63,7 +63,7 @@ export const UserTasks = () => {
       showMenu: false,
     },
     {
-      id: "4",
+      id: 4,
       name: "Тестирование",
       tasks: [
         {
@@ -75,7 +75,7 @@ export const UserTasks = () => {
       showMenu: false,
     },
     {
-      id: "5",
+      id: 5,
       name: "Тестируется",
       tasks: [
         {
@@ -87,7 +87,7 @@ export const UserTasks = () => {
       showMenu: false,
     },
     {
-      id: "6",
+      id: 6,
       name: "Готово",
       tasks: [
         {

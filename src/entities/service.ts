@@ -6,7 +6,7 @@ export interface ISelectItem {
 }
 
 export type ColumnType = {
-  id: string;
+  id: number;
   name: string;
   tasks: TaskType[];
   color: string;

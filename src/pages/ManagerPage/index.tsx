@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { v4 as v4uuid } from "uuid";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { AxiosResponse } from "axios";
 import dayjs from "dayjs";
 
@@ -97,6 +97,8 @@ export const ManagerPage = () => {
     },
   ]);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingBacklog, setIsLoadingBacklog] = useState(true);
   const [showDeleteTaskModal, setShowDeleteTaskModal] = useState(false);
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
   const [showStartSprintModal, setShowStartSprintModal] = useState(false);
@@ -124,12 +126,15 @@ export const ManagerPage = () => {
 
   useEffect(() => {
     if (!requested.current) {
+      setIsLoading(true);
+
       api()
         .get("/sprint/all")
         .then((body: AxiosResponse<ISprint[]>) => {
           if (body?.data?.length > 0) {
             //получили текущий спринт
             setCurrentSprint(body?.data?.[0]);
+            setIsLoading(true);
 
             api()
               .get(`/sprint/${body?.data?.[0]?.id}/tasks`)
@@ -184,10 +189,21 @@ export const ManagerPage = () => {
 
                     return newColumns;
                   });
+
+                  setIsLoading(false);
                 }
+              })
+              .catch(() => {
+                setIsLoading(false);
               });
+          } else {
+            setIsLoading(false);
           }
+        })
+        .catch(() => {
+          setIsLoading(false);
         });
+
       api()
         .get("/task/all")
         .then((body: AxiosResponse<TaskType[]>) => {
@@ -205,6 +221,10 @@ export const ManagerPage = () => {
               return newColumns;
             });
           }
+          setIsLoadingBacklog(false);
+        })
+        .catch(() => {
+          setIsLoadingBacklog(false);
         });
 
       requested.current = true;
@@ -251,15 +271,27 @@ export const ManagerPage = () => {
           </Box>
         </Box>
 
-        <Columns
-          columns={columns}
-          setColumns={setColumns}
-          currentSprint={currentSprint?.id ?? "1"}
-          setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
-          setShowUpdateTaskModal={() => setShowUpdateTask(true)}
-          setUpdateTaskItem={setUpdateTaskItem}
-          setShowMoreInfoModal={setShowMoreInfoModal}
-        />
+        {isLoading || isLoadingBacklog ? (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            height="70vh"
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          <Columns
+            columns={columns}
+            setColumns={setColumns}
+            currentSprint={currentSprint?.id ?? "1"}
+            setShowCreateTaskModal={() => setShowCreateTaskModal(true)}
+            setShowUpdateTaskModal={() => setShowUpdateTask(true)}
+            setUpdateTaskItem={setUpdateTaskItem}
+            setShowMoreInfoModal={setShowMoreInfoModal}
+          />
+        )}
       </Box>
 
       <DeleteTaskModal

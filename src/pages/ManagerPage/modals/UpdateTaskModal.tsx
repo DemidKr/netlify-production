@@ -30,7 +30,7 @@ export const UpdateTaskModal = memo(({ show, onClose, task }: IProps) => {
     task.deadline ? dayjs(task.deadline) : dayjs().add(14, "day"),
   );
   const [priority, setPriority] = useState(
-    getPriorityById(task?.priority_id ?? 0),
+    getPriorityById(task?.priority_id ?? 1),
   );
   const [executors, setExecutors] = useState<ISelectItem[]>([]);
   const [executor, setExecutor] = useState(task.executor_id ?? "");

@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, useState, useRef } from "react";
 import { AxiosResponse } from "axios";
 import { v4 as v4uuid } from "uuid";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import { Columns } from "../../components/Columns";
 import { PRIORITY_ENUM, ColumnType, TaskType, ISprint } from "../../entities";
@@ -20,6 +20,8 @@ const EMPTY_TASK = {
 };
 
 export const UserTasks = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingBacklog, setIsLoadingBacklog] = useState(true);
   const requested = useRef(false);
   const [showMoreInfoModal, setShowMoreInfoModal] = useState<TaskType | null>(
     null,
@@ -102,12 +104,15 @@ export const UserTasks = () => {
 
   useEffect(() => {
     if (!requested.current) {
+      setIsLoading(true);
+
       api()
         .get("/sprint/all")
         .then((body: AxiosResponse<ISprint[]>) => {
           if (body?.data?.length > 0) {
             //получили текущий спринт
             setCurrentSprint(body?.data?.[0]);
+            setIsLoading(true);
 
             api()
               .get(`/sprint/${body?.data?.[0]?.id}/tasks`)
@@ -162,10 +167,21 @@ export const UserTasks = () => {
 
                     return newColumns;
                   });
+
+                  setIsLoading(false);
                 }
+              })
+              .catch(() => {
+                setIsLoading(false);
               });
+          } else {
+            setIsLoading(false);
           }
+        })
+        .catch(() => {
+          setIsLoading(false);
         });
+
       api()
         .get("/task/all")
         .then((body: AxiosResponse<TaskType[]>) => {
@@ -183,6 +199,10 @@ export const UserTasks = () => {
               return newColumns;
             });
           }
+          setIsLoadingBacklog(false);
+        })
+        .catch(() => {
+          setIsLoadingBacklog(false);
         });
 
       requested.current = true;
@@ -218,11 +238,23 @@ export const UserTasks = () => {
           </Typography>
         </Box>
 
-        <Columns
-          columns={columns}
-          setColumns={setColumns}
-          setShowMoreInfoModal={setShowMoreInfoModal}
-        />
+        {isLoading || isLoadingBacklog ? (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            width="100%"
+            height="70vh"
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          <Columns
+            columns={columns}
+            setColumns={setColumns}
+            setShowMoreInfoModal={setShowMoreInfoModal}
+          />
+        )}
       </Box>
 
       <MoreInfoModal

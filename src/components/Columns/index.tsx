@@ -81,11 +81,8 @@ export const Columns = ({
         (task) => task.id === active.id,
       );
 
-      // нельзя перенести обратно задачу в бэклог всем кроме менеджера
-      if (
-        copyColumnsArray[newColumnIndex].id === 1 &&
-        currentUser.role_id !== ROLE_ID_ENUM.MANAGER
-      ) {
+      // нельзя перенести обратно задачу в бэклог
+      if (copyColumnsArray[newColumnIndex].id === 1) {
         return;
       }
 

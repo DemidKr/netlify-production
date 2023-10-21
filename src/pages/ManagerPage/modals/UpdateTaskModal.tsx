@@ -71,18 +71,20 @@ export const UpdateTaskModal = memo(({ show, onClose, task }: IProps) => {
             );
           }
         });
+    }
 
+    if (show) {
       setName(task.name ?? "");
       setDescription(task.description ?? "");
       setDeadline(
         task.deadline_at ? dayjs(task.deadline_at) : dayjs().add(14, "day"),
       );
       setPriority(getPriorityById(task?.priority_id ?? 1));
-      setExecutor(task.executor_id ?? "");
+      setExecutor(task.executor?.id ?? "");
       setEstimate(task.estimate ?? 0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [show]);
+  }, [show, task?.id]);
 
   return (
     <ModalWindow

@@ -25,7 +25,7 @@ export const getPriorityIdByName = (priorityName: string) => {
       return 4;
     default:
     case PRIORITY_ENUM.MEDIUM:
-      return 4;
+      return 3;
   }
 };
 
